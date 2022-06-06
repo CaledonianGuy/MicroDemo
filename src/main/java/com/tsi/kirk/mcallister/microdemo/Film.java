@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microDemo;
+package com.tsi.kirk.mcallister.microdemo;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
@@ -26,6 +26,8 @@ public class Film {
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
+    public Film() {}
+
     public Film(String title, int languageId, int rentalDuration, float rentalRate, float replacementCost) {
         this.title = title;
         this.languageId = languageId;
@@ -33,8 +35,6 @@ public class Film {
         this.rentalRate = rentalRate;
         this.replacementCost = replacementCost;
     }
-
-    public Film() {}
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------

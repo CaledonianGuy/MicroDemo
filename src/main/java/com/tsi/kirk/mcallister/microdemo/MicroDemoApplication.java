@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microDemo;
+package com.tsi.kirk.mcallister.microdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -17,15 +17,30 @@ public class MicroDemoApplication {
 	private final FilmRepository filmRepo;
 	@Autowired
 	private final CategoryRepository catRepo;
+	@Autowired
+	private final LanguageRepository langRepo;
+	@Autowired
+	private final FilmTextRepository filmTextRepo;
+	@Autowired
+	private final InventoryItemRepository inventRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroDemoApplication.class, args);
 	}
 
-	public MicroDemoApplication(ActorRepository actorRepo, FilmRepository filmRepo, CategoryRepository catRepo) {
+	public MicroDemoApplication(ActorRepository actorRepo,
+								FilmRepository filmRepo,
+								CategoryRepository catRepo,
+								LanguageRepository langRepo,
+								FilmTextRepository filmTextRepo,
+								InventoryItemRepository inventRepo) {
+
 		this.actorRepo = actorRepo;
 		this.filmRepo = filmRepo;
 		this.catRepo = catRepo;
+		this.langRepo = langRepo;
+		this.filmTextRepo = filmTextRepo;
+		this.inventRepo = inventRepo;
 	}
 
 	@GetMapping("/All_Actors")
@@ -50,5 +65,23 @@ public class MicroDemoApplication {
 	public  @ResponseBody
 	Iterable<Category> getAllCategories() {
 		return catRepo.findAll();
+	}
+
+	@GetMapping("/All_Languages")
+	public  @ResponseBody
+	Iterable<Language> getAllLanguages() {
+		return langRepo.findAll();
+	}
+
+	@GetMapping("/All_Film_Texts")
+	public  @ResponseBody
+	Iterable<FilmText> getAllFilmTexts() {
+		return filmTextRepo.findAll();
+	}
+
+	@GetMapping("/All_Inventory_Items")
+	public  @ResponseBody
+	Iterable<InventoryItem> getAllInventoryItems() {
+		return inventRepo.findAll();
 	}
 }

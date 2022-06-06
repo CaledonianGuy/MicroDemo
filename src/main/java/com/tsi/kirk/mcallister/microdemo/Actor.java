@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microDemo;
+package com.tsi.kirk.mcallister.microdemo;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
@@ -16,12 +16,12 @@ public class Actor {
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
+    public Actor() {}
+
     public Actor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public Actor() {}
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------

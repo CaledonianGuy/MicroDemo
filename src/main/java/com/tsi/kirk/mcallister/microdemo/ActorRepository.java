@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microDemo;
+package com.tsi.kirk.mcallister.microdemo;
 
 import org.springframework.data.repository.CrudRepository;
 

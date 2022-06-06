@@ -1,35 +1,34 @@
-package com.tsi.kirk.mcallister.microDemo;
+package com.tsi.kirk.mcallister.microdemo;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "Language")
+public class Language {
 
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int categoryId;
+    int languageId;
     String name;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
-    public Category() {}
+    public Language() {}
 
-    public Category(String name) {
+    public Language(String name) {
         this.name = name;
     }
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
-
-    public int getCategoryId() {
-        return categoryId;
+    public int getLanguageId() {
+        return languageId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
 
     public String getName() {
