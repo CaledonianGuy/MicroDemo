@@ -1,10 +1,8 @@
 package com.tsi.kirk.mcallister.microdemo;
 
-//@SpringBootTest
-class MicroDemoApplicationTests {
+import org.springframework.boot.test.context.SpringBootTest;
 
-//	@Test
-//	void contextLoads() {
-//	}
+@SpringBootTest
+class MicroDemoApplicationTests {
 
 }

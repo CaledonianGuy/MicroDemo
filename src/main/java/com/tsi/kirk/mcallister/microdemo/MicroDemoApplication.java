@@ -24,7 +24,7 @@ public class MicroDemoApplication {
 	@Autowired
 	private final FilmTextRepository filmTextRepo;
 	@Autowired
-	private final InventoryItemRepository inventRepo;
+	private final InventoryItemRepository inventItemRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroDemoApplication.class, args);
@@ -35,14 +35,14 @@ public class MicroDemoApplication {
 								CategoryRepository catRepo,
 								LanguageRepository langRepo,
 								FilmTextRepository filmTextRepo,
-								InventoryItemRepository inventRepo) {
+								InventoryItemRepository inventItemRepo) {
 
 		this.actorRepo = actorRepo;
 		this.filmRepo = filmRepo;
 		this.catRepo = catRepo;
 		this.langRepo = langRepo;
 		this.filmTextRepo = filmTextRepo;
-		this.inventRepo = inventRepo;
+		this.inventItemRepo = inventItemRepo;
 	}
 
 	@GetMapping("/All_Actors")
@@ -51,7 +51,7 @@ public class MicroDemoApplication {
 		return actorRepo.findAll();
 	}
 
-	@GetMapping("/Find_Actor")
+	@GetMapping("/Get_Actor")
 	public @ResponseBody
 	Optional<Actor> getActor(@RequestParam int id) {
 		if (actorRepo.existsById(id)) {
@@ -65,7 +65,7 @@ public class MicroDemoApplication {
 	String addActor(@RequestParam String firstName, String lastName) {
 		Actor a = new Actor(firstName, lastName);
 		actorRepo.save(a);
-		return "Actor added to DB.";
+		return "Actor added to database";
 	}
 
 	@DeleteMapping("/Delete_Actor")
@@ -73,13 +73,36 @@ public class MicroDemoApplication {
 	String deleteActor(@RequestParam int id) {
 		if (actorRepo.existsById(id)) {
 			actorRepo.deleteById(id);
-			return "Actor deleted from DB.";
+			return "Actor deleted from database";
 		} else {
-			return "Actor not in DB.";
+			return "Actor not in database";
 		}
 	}
 
-//	@PutMapping("/Put_Actors")
+	@PutMapping("/Update_Actor")
+	public @ResponseBody
+	String updateActor(@RequestParam int id, String firstName, String lastName) {
+		if (getActor(id).isPresent()) {
+			String msg = "";
+			Actor a = getActor(id).get();
+			if (!firstName.isBlank()) {
+				a.setFirstName(firstName);
+				msg += "First name updated.\n";
+			} else {
+				msg += "First name is blank.\n";
+			}
+			if (!lastName.isBlank()) {
+				a.setLastName(lastName);
+				msg += "Last name updated.";
+			} else {
+				msg += "Last name is blank.";
+			}
+			actorRepo.save(a);
+			return msg;
+		} else {
+			return "Actor not found";
+		}
+	}
 
 	@GetMapping("/All_Films")
 	public @ResponseBody
@@ -108,6 +131,6 @@ public class MicroDemoApplication {
 	@GetMapping("/All_Inventory_Items")
 	public @ResponseBody
 	Iterable<InventoryItem> getAllInventoryItems() {
-		return inventRepo.findAll();
+		return inventItemRepo.findAll();
 	}
 }
