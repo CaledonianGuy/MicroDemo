@@ -83,8 +83,8 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	String updateActor(@RequestParam int id, String firstName, String lastName) {
 		if (getActor(id).isPresent()) {
-			String msg = "";
 			Actor a = getActor(id).get();
+			String msg = "";
 			if (!firstName.isBlank()) {
 				a.setFirstName(firstName);
 				msg += "First name updated.\n";

@@ -47,6 +47,8 @@ public class MockitoTest {
         int testIdOne = 1;
         Optional<Actor> testActor = microDemoApp.getActor(testIdOne);
 
+        verify(actorRepo).existsById(testIdOne);
+
         Assertions.assertNotNull(testActor, "Object is NULL");
 
         int testIdTwo = 1000;
