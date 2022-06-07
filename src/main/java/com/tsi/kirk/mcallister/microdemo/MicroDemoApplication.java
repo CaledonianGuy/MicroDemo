@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin(origins = "*") //needed for receiving request via api
 @SpringBootApplication
 @RestController //Handles GET, POST, DELETE, PUT requests
@@ -44,43 +46,67 @@ public class MicroDemoApplication {
 	}
 
 	@GetMapping("/All_Actors")
-	public  @ResponseBody
-	Iterable<Actor>getAllActors() {
+	public @ResponseBody
+	Iterable<Actor> getAllActors() {
 		return actorRepo.findAll();
 	}
 
-//	@PostMapping("/Post_Actors")
-//
-//	@DeleteMapping("/Delete_Actors")
-//
+	@GetMapping("/Find_Actor")
+	public @ResponseBody
+	Optional<Actor> getActor(@RequestParam int id) {
+		if (actorRepo.existsById(id)) {
+			return actorRepo.findById(id);
+		}
+		return Optional.empty();
+	}
+
+	@PostMapping("/Add_Actor")
+	public @ResponseBody
+	String addActor(@RequestParam String firstName, String lastName) {
+		Actor a = new Actor(firstName, lastName);
+		actorRepo.save(a);
+		return "Actor added to DB.";
+	}
+
+	@DeleteMapping("/Delete_Actor")
+	public @ResponseBody
+	String deleteActor(@RequestParam int id) {
+		if (actorRepo.existsById(id)) {
+			actorRepo.deleteById(id);
+			return "Actor deleted from DB.";
+		} else {
+			return "Actor not in DB.";
+		}
+	}
+
 //	@PutMapping("/Put_Actors")
 
 	@GetMapping("/All_Films")
-	public  @ResponseBody
-	Iterable<Film>getAllFilms() {
+	public @ResponseBody
+	Iterable<Film> getAllFilms() {
 		return filmRepo.findAll();
 	}
 
 	@GetMapping("/All_Categories")
-	public  @ResponseBody
+	public @ResponseBody
 	Iterable<Category> getAllCategories() {
 		return catRepo.findAll();
 	}
 
 	@GetMapping("/All_Languages")
-	public  @ResponseBody
+	public @ResponseBody
 	Iterable<Language> getAllLanguages() {
 		return langRepo.findAll();
 	}
 
 	@GetMapping("/All_Film_Texts")
-	public  @ResponseBody
+	public @ResponseBody
 	Iterable<FilmText> getAllFilmTexts() {
 		return filmTextRepo.findAll();
 	}
 
 	@GetMapping("/All_Inventory_Items")
-	public  @ResponseBody
+	public @ResponseBody
 	Iterable<InventoryItem> getAllInventoryItems() {
 		return inventRepo.findAll();
 	}

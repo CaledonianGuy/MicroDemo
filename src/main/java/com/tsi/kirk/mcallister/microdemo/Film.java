@@ -21,8 +21,8 @@ public class Film {
     float rentalRate;
     int length;
     float replacementCost;
-    //rating ENUM
-    //special_features SET
+    String rating;
+    String specialFeatures;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -118,6 +118,21 @@ public class Film {
         this.replacementCost = replacementCost;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public void setSpecialFeatures(String specialFeatures) {
+        this.specialFeatures = specialFeatures;
+    }
     // -----------------------------------------------------------------------
 
     //Methods ----------------------------------------------------------------
