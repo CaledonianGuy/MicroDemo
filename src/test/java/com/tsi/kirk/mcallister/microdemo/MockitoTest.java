@@ -44,13 +44,15 @@ public class MockitoTest {
 
     @Test
     public void getActor() {
-//        int testId = 1;
-//        Optional<Actor> testActor = Optional.of(new Actor(anyString(), anyString()));
-//
-//        when(actorRepo.findById(testId)).thenReturn(testActor);
-//        microDemoApp.getActor(testId);
-//        verify(actorRepo).existsById(testId);
+        int testIdOne = 1;
+        Optional<Actor> testActor = microDemoApp.getActor(testIdOne);
 
+        Assertions.assertNotNull(testActor, "Object is NULL");
+
+        int testIdTwo = 1000;
+        testActor = microDemoApp.getActor(testIdTwo);
+
+        Assertions.assertEquals(Optional.empty(), testActor, "Object is NOT NULL");
     }
 
     @Test
@@ -66,7 +68,7 @@ public class MockitoTest {
 
         actorArgumentCaptor.getValue();
 
-        Assertions.assertEquals(expected, actual, "Actor was not saved into the database");
+        Assertions.assertEquals(expected, actual, "Output does not match expected");
     }
 
     @Test
