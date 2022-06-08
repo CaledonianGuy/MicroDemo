@@ -53,54 +53,38 @@ public class MicroDemoApplication {
 
 	@GetMapping("/Get_Actor")
 	public @ResponseBody
-	Optional<Actor> getActor(@RequestParam int id) {
-		if (actorRepo.existsById(id)) {
-			return actorRepo.findById(id);
-		}
-		return Optional.empty();
+	Actor getActor(@RequestParam int id) {
+		Optional<Actor> foundActor = actorRepo.findById(id);
+		return foundActor.orElse(null);
 	}
 
 	@PostMapping("/Add_Actor")
 	public @ResponseBody
-	String addActor(@RequestParam String firstName, String lastName) {
+	void addActor(@RequestParam String firstName, String lastName) {
 		Actor a = new Actor(firstName, lastName);
 		actorRepo.save(a);
-		return "Actor added to database";
 	}
 
 	@DeleteMapping("/Delete_Actor")
 	public @ResponseBody
-	String deleteActor(@RequestParam int id) {
+	void deleteActor(@RequestParam int id) {
 		if (actorRepo.existsById(id)) {
 			actorRepo.deleteById(id);
-			return "Actor deleted from database";
-		} else {
-			return "Actor not in database";
 		}
 	}
 
 	@PutMapping("/Update_Actor")
 	public @ResponseBody
-	String updateActor(@RequestParam int id, String firstName, String lastName) {
-		if (getActor(id).isPresent()) {
-			Actor a = getActor(id).get();
-			String msg = "";
+	void updateActor(@RequestParam int id, String firstName, String lastName) {
+		if (actorRepo.existsById(id)) {
+			Actor a = getActor(id);
 			if (!firstName.isBlank()) {
 				a.setFirstName(firstName);
-				msg += "First name updated.\n";
-			} else {
-				msg += "First name is blank.\n";
 			}
 			if (!lastName.isBlank()) {
 				a.setLastName(lastName);
-				msg += "Last name updated.";
-			} else {
-				msg += "Last name is blank.";
 			}
 			actorRepo.save(a);
-			return msg;
-		} else {
-			return "Actor not found";
 		}
 	}
 

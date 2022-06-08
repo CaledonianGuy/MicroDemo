@@ -1,17 +1,21 @@
 package com.tsi.kirk.mcallister.microdemo;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,38 +48,29 @@ public class MockitoTest {
 
     @Test
     public void getActor() {
-        int testIdOne = 1;
-        Optional<Actor> testActor = microDemoApp.getActor(testIdOne);
-
-        verify(actorRepo).existsById(testIdOne);
-
-        Assertions.assertNotNull(testActor, "Object is NULL");
-
-        int testIdTwo = 1000;
-        testActor = microDemoApp.getActor(testIdTwo);
-
-        Assertions.assertEquals(Optional.empty(), testActor, "Object is NOT NULL");
+        //TODO this might need to be bigger - since not a main mapping might skip for now
+        int mockId = 1;
+        microDemoApp.getActor(mockId);
+        verify(actorRepo).findById(mockId);
+//        Assertions.assertNotNull(mockActor, "Object is NULL");
     }
 
     @Test
     public void addActor() {
-        Actor testActor = new Actor("Emma", "Bacon");
+        Actor expectedActor = new Actor("EMMA", "BACON");
 
-        String expected = "Actor added to database";
-        String actual = microDemoApp.addActor(testActor.getFirstName(), testActor.getLastName());
+        microDemoApp.addActor(expectedActor.getFirstName(), expectedActor.getLastName());
 
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-
         verify(actorRepo).save(actorArgumentCaptor.capture());
+        Actor actualActor = actorArgumentCaptor.getValue();
 
-        actorArgumentCaptor.getValue();
-
-        Assertions.assertEquals(expected, actual, "Output does not match expected");
+        Assertions.assertTrue(new ReflectionEquals(expectedActor).matches(actualActor));
     }
 
     @Test
     public void deleteActor() {
-
+        //TODO build/refactor method
 
 //        int testId = 1;
 
@@ -96,5 +91,10 @@ public class MockitoTest {
 //        Assertions.assertEquals(expectedTwo, actualTwo, "Actor was found in the database");
 
 
+    }
+
+    @Test
+    public void updateActor() {
+        //TODO build this method
     }
 }
