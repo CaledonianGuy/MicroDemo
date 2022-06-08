@@ -2,6 +2,8 @@ package com.tsi.kirk.mcallister.microdemo.inventory;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
+
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
@@ -18,9 +20,9 @@ public class Film {
     int languageId;
     int originalLanguageId;
     int rentalDuration;
-    float rentalRate;
+    BigDecimal rentalRate;
     int length;
-    float replacementCost;
+    BigDecimal replacementCost;
     String rating;
     String specialFeatures;
     // -----------------------------------------------------------------------
@@ -28,7 +30,7 @@ public class Film {
     //Constructors -----------------------------------------------------------
     public Film() {}
 
-    public Film(String title, int languageId, int rentalDuration, float rentalRate, float replacementCost) {
+    public Film(String title, int languageId, int rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost) {
         this.title = title;
         this.languageId = languageId;
         this.rentalDuration = rentalDuration;
@@ -94,11 +96,11 @@ public class Film {
         this.rentalDuration = rentalDuration;
     }
 
-    public float getRentalRate() {
+    public BigDecimal getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(float rentalRate) {
+    public void setRentalRate(BigDecimal rentalRate) {
         this.rentalRate = rentalRate;
     }
 
@@ -110,11 +112,11 @@ public class Film {
         this.length = length;
     }
 
-    public float getReplacementCost() {
+    public BigDecimal getReplacementCost() {
         return replacementCost;
     }
 
-    public void setReplacementCost(float replacementCost) {
+    public void setReplacementCost(BigDecimal replacementCost) {
         this.replacementCost = replacementCost;
     }
 
