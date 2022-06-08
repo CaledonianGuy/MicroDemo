@@ -1,5 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo;
 
+import com.tsi.kirk.mcallister.microdemo.inventory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +37,6 @@ public class MicroDemoApplication {
 								LanguageRepository langRepo,
 								FilmTextRepository filmTextRepo,
 								InventoryItemRepository inventItemRepo) {
-
 		this.actorRepo = actorRepo;
 		this.filmRepo = filmRepo;
 		this.catRepo = catRepo;

@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microdemo;
+package com.tsi.kirk.mcallister.microdemo.inventory;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;

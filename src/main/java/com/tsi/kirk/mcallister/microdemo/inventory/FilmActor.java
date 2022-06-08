@@ -1,51 +1,43 @@
-package com.tsi.kirk.mcallister.microdemo;
+package com.tsi.kirk.mcallister.microdemo.inventory;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "film_text")
-public class FilmText {
+@Table(name = "film_actor")
+public class FilmActor {
 
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int actorId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int filmId;
-    String title;
-    String description;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
-    public FilmText() {}
-
-    public FilmText(String title) {
-        this.title = title;
-    }
+    public FilmActor() {}
     // -----------------------------------------------------------------------
 
-    //Getters & Setters ------------------------------------------------------=
+    //Getters & Setters ------------------------------------------------------
+    public int getActorId() {
+        return actorId;
+    }
+
+    public void setActorId(int actorId) {
+        this.actorId = actorId;
+    }
+
     public int getFilmId() {
         return filmId;
     }
 
     public void setFilmId(int filmId) {
         this.filmId = filmId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
     // -----------------------------------------------------------------------
 

@@ -1,52 +1,43 @@
-package com.tsi.kirk.mcallister.microdemo;
+package com.tsi.kirk.mcallister.microdemo.inventory;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "actor")
-public class Actor {
+@Table(name = "category")
+public class Category {
 
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int actorId;
-    String firstName;
-    String lastName;
+    int categoryId;
+    String name;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
-    public Actor() {}
+    public Category() {}
 
-    public Actor(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Category(String name) {
+        this.name = name;
     }
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
-    public int getActorId() {
-        return actorId;
+
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setActorId(int actorId) {
-        this.actorId = actorId;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
     // -----------------------------------------------------------------------
 

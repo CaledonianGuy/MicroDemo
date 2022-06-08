@@ -1,6 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo;
 
-import org.junit.Assert;
+import com.tsi.kirk.mcallister.microdemo.inventory.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoTest {
@@ -37,6 +33,12 @@ public class MockitoTest {
 
     @BeforeEach
     void setUp() {
+        actorRepo = mock(ActorRepository.class);
+        filmRepo = mock(FilmRepository.class);
+        catRepo = mock(CategoryRepository.class);
+        langRepo = mock(LanguageRepository.class);
+        filmTextRepo = mock(FilmTextRepository.class);
+        inventItemRepo = mock(InventoryItemRepository.class);
         microDemoApp = new MicroDemoApplication(actorRepo, filmRepo, catRepo, langRepo, filmTextRepo, inventItemRepo);
     }
 
@@ -52,7 +54,6 @@ public class MockitoTest {
         int mockId = 1;
         microDemoApp.getActor(mockId);
         verify(actorRepo).findById(mockId);
-//        Assertions.assertNotNull(mockActor, "Object is NULL");
     }
 
     @Test
@@ -80,15 +81,27 @@ public class MockitoTest {
     @Test
     public void updateActor() {
         int mockId = 1;
-        Actor expectedActor = new Actor("EMMA", "BACON");
+        Actor expectedActorOne = new Actor("EMMA", "BACON");
 
-        when(actorRepo.findById(mockId)).thenReturn(Optional.of(expectedActor));
-        microDemoApp.updateActor(mockId, expectedActor.getFirstName(), expectedActor.getLastName());
+        when(actorRepo.findById(mockId)).thenReturn(Optional.of(expectedActorOne));
+        microDemoApp.updateActor(mockId, expectedActorOne.getFirstName(), expectedActorOne.getLastName());
 
         ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-        verify(actorRepo).save(actorArgumentCaptor.capture());
+        verify(actorRepo, times(1)).save(actorArgumentCaptor.capture());
         Actor actualActor = actorArgumentCaptor.getValue();
 
-        Assertions.assertTrue(new ReflectionEquals(expectedActor).matches(actualActor));
+        Assertions.assertTrue(new ReflectionEquals(expectedActorOne).matches(actualActor));
+
+
+        Actor expectedActorTwo = new Actor(" ", " ");
+
+        when(actorRepo.findById(mockId)).thenReturn(Optional.of(expectedActorTwo));
+        microDemoApp.updateActor(mockId, expectedActorTwo.getFirstName(), expectedActorTwo.getLastName());
+
+        actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepo, times(2)).save(actorArgumentCaptor.capture());
+        actualActor = actorArgumentCaptor.getValue();
+
+        Assertions.assertTrue(new ReflectionEquals(expectedActorTwo).matches(actualActor));
     }
 }
