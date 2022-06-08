@@ -68,24 +68,20 @@ public class MicroDemoApplication {
 	@DeleteMapping("/Delete_Actor")
 	public @ResponseBody
 	void deleteActor(@RequestParam int id) {
-		if (actorRepo.existsById(id)) {
-			actorRepo.deleteById(id);
-		}
+		actorRepo.deleteById(id);
 	}
 
 	@PutMapping("/Update_Actor")
 	public @ResponseBody
 	void updateActor(@RequestParam int id, String firstName, String lastName) {
-		if (actorRepo.existsById(id)) {
-			Actor a = getActor(id);
-			if (!firstName.isBlank()) {
-				a.setFirstName(firstName);
-			}
-			if (!lastName.isBlank()) {
-				a.setLastName(lastName);
-			}
-			actorRepo.save(a);
+		Actor a = getActor(id);
+		if (!firstName.isBlank()) {
+			a.setFirstName(firstName);
 		}
+		if (!lastName.isBlank()) {
+			a.setLastName(lastName);
+		}
+		actorRepo.save(a);
 	}
 
 	@GetMapping("/All_Films")

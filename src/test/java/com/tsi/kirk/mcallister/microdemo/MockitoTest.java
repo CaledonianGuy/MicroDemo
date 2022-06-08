@@ -70,31 +70,25 @@ public class MockitoTest {
 
     @Test
     public void deleteActor() {
-        //TODO build/refactor method
+        //TODO not sure if more need to happen here
+        int mockId = 1;
 
-//        int testId = 1;
-
-//        String expectedOne = "Actor deleted from database";
-//        String expectedTwo = "Actor not in database";
-//        String actualOne = microDemoApp.deleteActor(testId);
-
-//        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
-//        when(microDemoApp.deleteActor(testId)).thenReturn("");
-
-//        verify(actorRepo).existsById(testId);
-//        verify(actorRepo).deleteById(testId);
-
-//        Assertions.assertEquals(expectedOne, actualOne, "Actor was not deleted from the database");
-
-//        String actualTwo = microDemoApp.deleteActor(testId);
-
-//        Assertions.assertEquals(expectedTwo, actualTwo, "Actor was found in the database");
-
-
+        microDemoApp.deleteActor(mockId);
+        verify(actorRepo).deleteById(mockId);
     }
 
     @Test
     public void updateActor() {
-        //TODO build this method
+        int mockId = 1;
+        Actor expectedActor = new Actor("EMMA", "BACON");
+
+        when(actorRepo.findById(mockId)).thenReturn(Optional.of(expectedActor));
+        microDemoApp.updateActor(mockId, expectedActor.getFirstName(), expectedActor.getLastName());
+
+        ArgumentCaptor<Actor> actorArgumentCaptor = ArgumentCaptor.forClass(Actor.class);
+        verify(actorRepo).save(actorArgumentCaptor.capture());
+        Actor actualActor = actorArgumentCaptor.getValue();
+
+        Assertions.assertTrue(new ReflectionEquals(expectedActor).matches(actualActor));
     }
 }
