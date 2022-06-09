@@ -4,6 +4,7 @@ Feature: Adding a new actor
   Scenario: I successfully add an actor into my table
     Given I have the actors information
     When I input the data into the database
+    # This might need reworded since method no longer returns String
     Then I get the success return string
 
 #  Scenario: I do not have enough information

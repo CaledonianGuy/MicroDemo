@@ -14,8 +14,8 @@ public class FilmCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int filmID;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int categoryId;
     // -----------------------------------------------------------------------
 

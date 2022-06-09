@@ -28,9 +28,11 @@ public class Category {
         return categoryId;
     }
 
+    /*
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+     */
 
     public String getName() {
         return name;

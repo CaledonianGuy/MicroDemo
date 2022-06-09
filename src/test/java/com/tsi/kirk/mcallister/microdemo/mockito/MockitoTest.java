@@ -1,13 +1,14 @@
-package com.tsi.kirk.mcallister.microdemo.unitandmockito;
+package com.tsi.kirk.mcallister.microdemo.mockito;
 
 import com.tsi.kirk.mcallister.microdemo.MicroDemoApplication;
+import com.tsi.kirk.mcallister.microdemo.exceptions.ObjectNotFoundException;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -39,6 +40,7 @@ public class MockitoTest {
         actorRepo = mock(ActorRepository.class);
         microDemoApp = new MicroDemoApplication(actorRepo);
 
+//        microDemoApp = mock(MicroDemoApplication.class);
         /*
         filmRepo = mock(FilmRepository.class);
         catRepo = mock(CategoryRepository.class);
@@ -78,9 +80,10 @@ public class MockitoTest {
 
     @Test
     public void deleteActor() {
-        //TODO not sure if more need to happen here
         int mockId = 1;
+        Actor expectedActor = new Actor("Drew", "McAvoy");
 
+        when(actorRepo.findById(mockId)).thenReturn(Optional.of(expectedActor));
         microDemoApp.deleteActor(mockId);
         verify(actorRepo).deleteById(mockId);
     }

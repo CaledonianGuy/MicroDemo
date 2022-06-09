@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microdemo.cucumber.addactor;
+package com.tsi.kirk.mcallister.microdemo.cucumber.stepdef;
 
 import com.tsi.kirk.mcallister.microdemo.MicroDemoApplication;
 import com.tsi.kirk.mcallister.microdemo.inventory.Actor;
@@ -9,14 +9,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.ArgumentCaptor;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class addActorStepDef {
+public class AddActorStepDef {
 
     Actor newActor;
     MicroDemoApplication microDemoApp;
