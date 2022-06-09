@@ -1,4 +1,4 @@
-package com.tsi.kirk.mcallister.microdemo;
+package com.tsi.kirk.mcallister.microdemo.unitandmockito;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

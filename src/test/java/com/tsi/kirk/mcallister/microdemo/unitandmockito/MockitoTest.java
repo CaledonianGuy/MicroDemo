@@ -1,5 +1,6 @@
-package com.tsi.kirk.mcallister.microdemo;
+package com.tsi.kirk.mcallister.microdemo.unitandmockito;
 
+import com.tsi.kirk.mcallister.microdemo.MicroDemoApplication;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +19,9 @@ import static org.mockito.Mockito.*;
 public class MockitoTest {
 
     private MicroDemoApplication microDemoApp;
-    @Mock
+    //@Mock
     private ActorRepository actorRepo;
+    /*
     @Mock
     private FilmRepository filmRepo;
     @Mock
@@ -30,16 +32,21 @@ public class MockitoTest {
     private FilmTextRepository filmTextRepo;
     @Mock
     private InventoryItemRepository inventItemRepo;
+     */
 
     @BeforeEach
     void setUp() {
         actorRepo = mock(ActorRepository.class);
+        microDemoApp = new MicroDemoApplication(actorRepo);
+
+        /*
         filmRepo = mock(FilmRepository.class);
         catRepo = mock(CategoryRepository.class);
         langRepo = mock(LanguageRepository.class);
         filmTextRepo = mock(FilmTextRepository.class);
         inventItemRepo = mock(InventoryItemRepository.class);
         microDemoApp = new MicroDemoApplication(actorRepo, filmRepo, catRepo, langRepo, filmTextRepo, inventItemRepo);
+         */
     }
 
     @Test

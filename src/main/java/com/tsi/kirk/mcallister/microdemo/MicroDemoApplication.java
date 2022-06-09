@@ -17,18 +17,22 @@ public class MicroDemoApplication {
 	@Autowired
 	private final ActorRepository actorRepo;
 	@Autowired
-	private final FilmRepository filmRepo;
+	private FilmRepository filmRepo;
 	@Autowired
-	private final CategoryRepository catRepo;
+	private CategoryRepository catRepo;
 	@Autowired
-	private final LanguageRepository langRepo;
+	private LanguageRepository langRepo;
 	@Autowired
-	private final FilmTextRepository filmTextRepo;
+	private FilmTextRepository filmTextRepo;
 	@Autowired
-	private final InventoryItemRepository inventItemRepo;
+	private InventoryItemRepository inventItemRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MicroDemoApplication.class, args);
+	}
+
+	public MicroDemoApplication(ActorRepository actorRepo) {
+		this.actorRepo = actorRepo;
 	}
 
 	public MicroDemoApplication(ActorRepository actorRepo,
