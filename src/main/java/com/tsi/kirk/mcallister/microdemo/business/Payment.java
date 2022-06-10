@@ -15,7 +15,7 @@ public class Payment {
     int paymentId;
     int customerId;
     int staffId;
-    int rentalId;
+    Integer rentalId;
     BigDecimal amount;
     LocalDateTime paymentDate;
     // -----------------------------------------------------------------------
@@ -56,11 +56,11 @@ public class Payment {
         this.staffId = staffId;
     }
 
-    public int getRentalId() {
+    public Integer getRentalId() {
         return rentalId;
     }
 
-    public void setRentalId(int rentalId) {
+    public void setRentalId(Integer rentalId) {
         this.rentalId = rentalId;
     }
 

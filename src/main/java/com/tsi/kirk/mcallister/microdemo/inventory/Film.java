@@ -18,7 +18,7 @@ public class Film {
     String description;
     Date releaseYear;
     int languageId;
-    int originalLanguageId;
+    Integer originalLanguageId;
     int rentalDuration;
     BigDecimal rentalRate;
     int length;
@@ -82,11 +82,11 @@ public class Film {
         this.languageId = languageId;
     }
 
-    public int getOriginalLanguageId() {
+    public Integer getOriginalLanguageId() {
         return originalLanguageId;
     }
 
-    public void setOriginalLanguageId(int originalLanguageId) {
+    public void setOriginalLanguageId(Integer originalLanguageId) {
         this.originalLanguageId = originalLanguageId;
     }
 

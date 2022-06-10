@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "inventory")
-public class InventoryItem {
+public class Inventory {
 
     //Attributes -------------------------------------------------------------
     @Id
@@ -16,9 +16,9 @@ public class InventoryItem {
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
-    public InventoryItem() {}
+    public Inventory() {}
 
-    public InventoryItem(int filmId, int storeId) {
+    public Inventory(int filmId, int storeId) {
         this.filmId = filmId;
         this.storeId = storeId;
     }

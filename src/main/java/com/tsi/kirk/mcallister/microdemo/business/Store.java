@@ -10,7 +10,7 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int storeId;
-    int managerId;
+    int managerStaffId;
     int addressId;
     // -----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ public class Store {
     public Store() {}
 
     public Store(int managerId, int addressId) {
-        this.managerId = managerId;
+        this.managerStaffId = managerId;
         this.addressId = addressId;
     }
     // -----------------------------------------------------------------------
@@ -33,11 +33,11 @@ public class Store {
     }
 
     public int getManagerId() {
-        return managerId;
+        return managerStaffId;
     }
 
     public void setManagerId(int managerId) {
-        this.managerId = managerId;
+        this.managerStaffId = managerId;
     }
 
     public int getAddressId() {

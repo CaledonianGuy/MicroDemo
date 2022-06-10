@@ -32,7 +32,7 @@ public class MockitoTest {
     @Mock
     private FilmTextRepository filmTextRepo;
     @Mock
-    private InventoryItemRepository inventItemRepo;
+    private InventoryRepository inventItemRepo;
      */
 
     @BeforeEach
@@ -46,7 +46,7 @@ public class MockitoTest {
         catRepo = mock(CategoryRepository.class);
         langRepo = mock(LanguageRepository.class);
         filmTextRepo = mock(FilmTextRepository.class);
-        inventItemRepo = mock(InventoryItemRepository.class);
+        inventItemRepo = mock(InventoryRepository.class);
         microDemoApp = new MicroDemoApplication(actorRepo, filmRepo, catRepo, langRepo, filmTextRepo, inventItemRepo);
          */
     }

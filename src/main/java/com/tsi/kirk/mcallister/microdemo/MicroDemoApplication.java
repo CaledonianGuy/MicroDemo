@@ -1,6 +1,7 @@
 package com.tsi.kirk.mcallister.microdemo;
 
-import com.tsi.kirk.mcallister.microdemo.exceptions.ObjectNotFoundException;
+import com.tsi.kirk.mcallister.microdemo.business.*;
+import com.tsi.kirk.mcallister.microdemo.customerdata.*;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +28,29 @@ public class MicroDemoApplication {
 	@Autowired
 	private FilmTextRepository filmTextRepo;
 	@Autowired
-	private InventoryItemRepository inventItemRepo;
+	private InventoryRepository inventRepo;
+	@Autowired
+	private FilmCategoryRepository filmCatRepo;
+	@Autowired
+	private FilmActorRepository filmActorRepo;
+
+	@Autowired
+	private AddressRepository addressRepo;
+	@Autowired
+	private CityRepository cityRepo;
+	@Autowired
+	private CountryRepository countryRepo;
+	@Autowired
+	private CustomerRepository customerRepo;
+
+	@Autowired
+	private PaymentRepository paymentRepo;
+	@Autowired
+	private RentalRepository rentalRepo;
+	@Autowired
+	private StaffRepository staffRepo;
+	@Autowired
+	private StoreRepository storeRepo;
 	// -----------------------------------------------------------------------
 
 	//Constructors -----------------------------------------------------------
@@ -41,13 +64,13 @@ public class MicroDemoApplication {
 								CategoryRepository catRepo,
 								LanguageRepository langRepo,
 								FilmTextRepository filmTextRepo,
-								InventoryItemRepository inventItemRepo) {
+								InventoryRepository inventRepo) {
 		this.actorRepo = actorRepo;
 		this.filmRepo = filmRepo;
 		this.catRepo = catRepo;
 		this.langRepo = langRepo;
 		this.filmTextRepo = filmTextRepo;
-		this.inventItemRepo = inventItemRepo;
+		this.inventRepo = inventRepo;
 	}
 	// -----------------------------------------------------------------------
 
@@ -58,8 +81,7 @@ public class MicroDemoApplication {
 	// -----------------------------------------------------------------------
 
 	//Mappings (Inventory) ---------------------------------------------------
-
-	//Actor
+	//Actor ******************************************************************
 	@GetMapping("/All_Actors")
 	public @ResponseBody
 	Iterable<Actor> getAllActors() {
@@ -100,9 +122,9 @@ public class MicroDemoApplication {
 		}
 		actorRepo.save(a);
 	}
-	//
+	// ***********************************************************************
 
-	//Film
+	//Film *******************************************************************
 	@GetMapping("/All_Films")
 	public @ResponseBody
 	Iterable<Film> getAllFilms() {
@@ -135,38 +157,122 @@ public class MicroDemoApplication {
 	void updateFilm(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName) {
 		//TODO switch to film
 	}
-	//
+	// ***********************************************************************
 
-	//Category
+	//Category ***************************************************************
 	@GetMapping("/All_Categories")
 	public @ResponseBody
 	Iterable<Category> getAllCategories() {
 		return catRepo.findAll();
 	}
-	//
+	// ***********************************************************************
 
-	//Language
+	//Language ***************************************************************
 	@GetMapping("/All_Languages")
 	public @ResponseBody
 	Iterable<Language> getAllLanguages() {
 		return langRepo.findAll();
 	}
-	//
+	// ***********************************************************************
 
-	//Film Text
+	//Film Text **************************************************************
 	@GetMapping("/All_Film_Texts")
 	public @ResponseBody
 	Iterable<FilmText> getAllFilmTexts() {
 		return filmTextRepo.findAll();
 	}
-	//
+	// ***********************************************************************
 
-	//Inventory
+	//Inventory **************************************************************
 	@GetMapping("/All_Inventory_Items")
 	public @ResponseBody
-	Iterable<InventoryItem> getAllInventoryItems() {
-		return inventItemRepo.findAll();
+	Iterable<Inventory> getAllInventoryItems() {
+		return inventRepo.findAll();
 	}
-	//
+	// ***********************************************************************
+
+	//Film Category 8*********************************************************
+	@GetMapping("/All_Film_Categories")
+	public @ResponseBody
+	Iterable<FilmCategory> getAllFilmCategories() {
+		return filmCatRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Film Actor *************************************************************
+	@GetMapping("/All_Film_Actors")
+	public @ResponseBody
+	Iterable<FilmActor> getAllFilmActors() {
+		return filmActorRepo.findAll();
+	}
+	// ***********************************************************************
+	// -----------------------------------------------------------------------
+
+	//Mappings (Customer Data) -----------------------------------------------
+	//Address ****************************************************************
+	@GetMapping("/All_Addresses")
+	public @ResponseBody
+	Iterable<Address> getAllAddresses() {
+		return addressRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//City *******************************************************************
+	@GetMapping("/All_Cities")
+	public @ResponseBody
+	Iterable<City> getAllCities() {
+		return cityRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Country ****************************************************************
+	@GetMapping("/All_Countries")
+	public @ResponseBody
+	Iterable<Country> getAllCountries() {
+		return countryRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Customer ***************************************************************
+	@GetMapping("/All_Customers")
+	public @ResponseBody
+	Iterable<Customer> getAllCustomers() {
+		return customerRepo.findAll();
+	}
+	// ***********************************************************************
+	// -----------------------------------------------------------------------
+
+	//Mappings (Business) ----------------------------------------------------
+	//Payment ****************************************************************
+	@GetMapping("/All_Payments")
+	public @ResponseBody
+	Iterable<Payment> getAllPayments() {
+		return paymentRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Rental *****************************************************************
+	@GetMapping("/All_Rentals")
+	public @ResponseBody
+	Iterable<Rental> getAllRentals() {
+		return rentalRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Staff ******************************************************************
+	@GetMapping("/All_Staff")
+	public @ResponseBody
+	Iterable<Staff> getAllStaff() {
+		return staffRepo.findAll();
+	}
+	// ***********************************************************************
+
+	//Store ******************************************************************
+	@GetMapping("/All_Stores")
+	public @ResponseBody
+	Iterable<Store> getAllStores() {
+		return storeRepo.findAll();
+	}
+	// ***********************************************************************
 	// -----------------------------------------------------------------------
 }

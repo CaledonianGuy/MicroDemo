@@ -18,7 +18,7 @@ public class Address {
     String address2;
     String district;
     int cityId;
-    String postCode;
+    String postalCode;
     String phone;
     // -----------------------------------------------------------------------
 
@@ -75,11 +75,11 @@ public class Address {
     }
 
     public String getPostCode() {
-        return postCode;
+        return postalCode;
     }
 
     public void setPostCode(String postCode) {
-        this.postCode = postCode;
+        this.postalCode = postCode;
     }
 
     public String getPhone() {
