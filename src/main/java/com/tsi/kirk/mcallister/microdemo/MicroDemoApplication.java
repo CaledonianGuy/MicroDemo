@@ -73,13 +73,33 @@ public class MicroDemoApplication {
 								CategoryRepository catRepo,
 								LanguageRepository langRepo,
 								FilmTextRepository filmTextRepo,
-								InventoryRepository inventRepo) {
+								InventoryRepository inventRepo,
+								FilmCategoryRepository filmCatRepo,
+								FilmActorRepository filmActorRepo,
+								AddressRepository addressRepo,
+								CityRepository cityRepo,
+								CountryRepository countryRepo,
+								CustomerRepository customerRepo,
+								PaymentRepository paymentRepo,
+								RentalRepository rentalRepo,
+								StaffRepository staffRepo,
+								StoreRepository storeRepo) {
 		this.actorRepo = actorRepo;
 		this.filmRepo = filmRepo;
 		this.catRepo = catRepo;
 		this.langRepo = langRepo;
 		this.filmTextRepo = filmTextRepo;
 		this.inventRepo = inventRepo;
+		this.filmCatRepo = filmCatRepo;
+		this.filmActorRepo = filmActorRepo;
+		this.addressRepo = addressRepo;
+		this.cityRepo = cityRepo;
+		this.countryRepo = countryRepo;
+		this.customerRepo = customerRepo;
+		this.paymentRepo = paymentRepo;
+		this.rentalRepo = rentalRepo;
+		this.staffRepo = staffRepo;
+		this.storeRepo = storeRepo;
 	}
 	// -----------------------------------------------------------------------
 
@@ -374,6 +394,33 @@ public class MicroDemoApplication {
 	Iterable<Address> getAllAddresses() {
 		return addressRepo.findAll();
 	}
+
+	@GetMapping("/Get_Address")
+	public @ResponseBody
+	Address getAddress(@RequestParam int id) {
+		Optional<Address> foundAddress = addressRepo.findById(id);
+		return foundAddress.orElse(null);
+	}
+
+	@PostMapping("/Add_Address")
+	public @ResponseBody
+	void addAddress() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Address")
+	public @ResponseBody
+	void deleteAddress(@RequestParam int id) {
+		if (addressRepo.findById(id).isPresent()) {
+			addressRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Address")
+	public @ResponseBody
+	void updateAddress() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//City *******************************************************************
@@ -381,6 +428,33 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<City> getAllCities() {
 		return cityRepo.findAll();
+	}
+
+	@GetMapping("/Get_City")
+	public @ResponseBody
+	City getCity(@RequestParam int id) {
+		Optional<City> foundCity = cityRepo.findById(id);
+		return foundCity.orElse(null);
+	}
+
+	@PostMapping("/Add_City")
+	public @ResponseBody
+	void addCity() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_City")
+	public @ResponseBody
+	void deleteCity(@RequestParam int id) {
+		if (cityRepo.findById(id).isPresent()) {
+			cityRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_City")
+	public @ResponseBody
+	void updateCity() {
+		//TODO build this mapping
 	}
 	// ***********************************************************************
 
@@ -390,6 +464,33 @@ public class MicroDemoApplication {
 	Iterable<Country> getAllCountries() {
 		return countryRepo.findAll();
 	}
+
+	@GetMapping("/Get_Country")
+	public @ResponseBody
+	Country getCountry(@RequestParam int id) {
+		Optional<Country> foundCountry = countryRepo.findById(id);
+		return foundCountry.orElse(null);
+	}
+
+	@PostMapping("/Add_Country")
+	public @ResponseBody
+	void addCountry() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Country")
+	public @ResponseBody
+	void deleteCountry(@RequestParam int id) {
+		if (countryRepo.findById(id).isPresent()) {
+			countryRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Country")
+	public @ResponseBody
+	void updateCountry() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//Customer ***************************************************************
@@ -397,6 +498,33 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<Customer> getAllCustomers() {
 		return customerRepo.findAll();
+	}
+
+	@GetMapping("/Get_Customer")
+	public @ResponseBody
+	Customer getCustomer(@RequestParam int id) {
+		Optional<Customer> foundCustomer = customerRepo.findById(id);
+		return foundCustomer.orElse(null);
+	}
+
+	@PostMapping("/Add_Customer")
+	public @ResponseBody
+	void addCustomer() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Customer")
+	public @ResponseBody
+	void deleteCustomer(@RequestParam int id) {
+		if (customerRepo.findById(id).isPresent()) {
+			customerRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Customer")
+	public @ResponseBody
+	void updateCustomer() {
+		//TODO build this mapping
 	}
 	// ***********************************************************************
 	// -----------------------------------------------------------------------
@@ -408,6 +536,33 @@ public class MicroDemoApplication {
 	Iterable<Payment> getAllPayments() {
 		return paymentRepo.findAll();
 	}
+
+	@GetMapping("/Get_Payment")
+	public @ResponseBody
+	Payment getPayment(@RequestParam int id) {
+		Optional<Payment> foundPayment = paymentRepo.findById(id);
+		return foundPayment.orElse(null);
+	}
+
+	@PostMapping("/Add_Payment")
+	public @ResponseBody
+	void addPayment() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Payment")
+	public @ResponseBody
+	void deletePayment(@RequestParam int id) {
+		if (paymentRepo.findById(id).isPresent()) {
+			paymentRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Payment")
+	public @ResponseBody
+	void updatePayment() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//Rental *****************************************************************
@@ -415,6 +570,33 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<Rental> getAllRentals() {
 		return rentalRepo.findAll();
+	}
+
+	@GetMapping("/Get_Rental")
+	public @ResponseBody
+	Rental getRental(@RequestParam int id) {
+		Optional<Rental> foundRental = rentalRepo.findById(id);
+		return foundRental.orElse(null);
+	}
+
+	@PostMapping("/Add_Rental")
+	public @ResponseBody
+	void addRental() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Rental")
+	public @ResponseBody
+	void deleteRental(@RequestParam int id) {
+		if (rentalRepo.findById(id).isPresent()) {
+			rentalRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Rental")
+	public @ResponseBody
+	void updateRental() {
+		//TODO build this mapping
 	}
 	// ***********************************************************************
 
@@ -424,6 +606,33 @@ public class MicroDemoApplication {
 	Iterable<Staff> getAllStaff() {
 		return staffRepo.findAll();
 	}
+
+	@GetMapping("/Get_Staff")
+	public @ResponseBody
+	Staff getStaff(@RequestParam int id) {
+		Optional<Staff> foundStaff = staffRepo.findById(id);
+		return foundStaff.orElse(null);
+	}
+
+	@PostMapping("/Add_Staff")
+	public @ResponseBody
+	void addStaff() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Staff")
+	public @ResponseBody
+	void deleteStaff(@RequestParam int id) {
+		if (staffRepo.findById(id).isPresent()) {
+			staffRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Staff")
+	public @ResponseBody
+	void updateStaff() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//Store ******************************************************************
@@ -431,6 +640,33 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<Store> getAllStores() {
 		return storeRepo.findAll();
+	}
+
+	@GetMapping("/Get_Store")
+	public @ResponseBody
+	Store getStore(@RequestParam int id) {
+		Optional<Store> foundStore = storeRepo.findById(id);
+		return foundStore.orElse(null);
+	}
+
+	@PostMapping("/Add_Store")
+	public @ResponseBody
+	void addStore() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Store")
+	public @ResponseBody
+	void deleteStore(@RequestParam int id) {
+		if (storeRepo.findById(id).isPresent()) {
+			storeRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Store")
+	public @ResponseBody
+	void updateStore() {
+		//TODO build this mapping
 	}
 	// ***********************************************************************
 	// -----------------------------------------------------------------------
