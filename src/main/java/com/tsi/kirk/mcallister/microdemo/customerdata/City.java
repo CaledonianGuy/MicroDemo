@@ -32,10 +32,6 @@ public class City {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
-    }
-
     public String getCity() {
         return city;
     }
@@ -44,11 +40,11 @@ public class City {
         this.city = city;
     }
 
-    public int getCountryId() {
+    public Integer getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(Integer countryId) {
         this.countryId = countryId;
     }
     // -----------------------------------------------------------------------

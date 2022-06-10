@@ -35,10 +35,6 @@ public class Rental {
         return rentalId;
     }
 
-    public void setRentalId(int rentalId) {
-        this.rentalId = rentalId;
-    }
-
     public LocalDateTime getRentalDate() {
         return rentalDate;
     }
@@ -47,19 +43,19 @@ public class Rental {
         this.rentalDate = rentalDate;
     }
 
-    public int getInventoryId() {
+    public Integer getInventoryId() {
         return inventoryId;
     }
 
-    public void setInventoryId(int inventoryId) {
+    public void setInventoryId(Integer inventoryId) {
         this.inventoryId = inventoryId;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -71,11 +67,11 @@ public class Rental {
         this.returnDate = returnDate;
     }
 
-    public int getStaffId() {
+    public Integer getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
     // -----------------------------------------------------------------------

@@ -38,10 +38,6 @@ public class Address {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -66,11 +62,11 @@ public class Address {
         this.district = district;
     }
 
-    public int getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 

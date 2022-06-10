@@ -27,16 +27,8 @@ public class FilmCategory {
         return filmID;
     }
 
-    public void setFilmID(int filmID) {
-        this.filmID = filmID;
-    }
-
     public int getCategoryId() {
         return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
     // -----------------------------------------------------------------------
 

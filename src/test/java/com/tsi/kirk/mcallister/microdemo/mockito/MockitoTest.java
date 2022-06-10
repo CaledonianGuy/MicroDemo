@@ -38,7 +38,7 @@ public class MockitoTest {
     @BeforeEach
     void setUp() {
         actorRepo = mock(ActorRepository.class);
-        microDemoApp = new MicroDemoApplication(actorRepo);
+//        microDemoApp = new MicroDemoApplication(actorRepo);
 
 //        microDemoApp = mock(MicroDemoApplication.class);
         /*

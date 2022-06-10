@@ -11,14 +11,14 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int inventoryId;
-    int filmId;
-    int storeId;
+    Integer filmId;
+    Integer storeId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Inventory() {}
 
-    public Inventory(int filmId, int storeId) {
+    public Inventory(Integer filmId, Integer storeId) {
         this.filmId = filmId;
         this.storeId = storeId;
     }
@@ -29,23 +29,19 @@ public class Inventory {
         return inventoryId;
     }
 
-    public void setInventoryId(int inventoryId) {
-        this.inventoryId = inventoryId;
-    }
-
-    public int getFilmId() {
+    public Integer getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
 
-    public int getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
     // -----------------------------------------------------------------------

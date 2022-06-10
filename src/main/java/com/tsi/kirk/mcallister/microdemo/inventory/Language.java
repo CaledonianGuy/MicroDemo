@@ -27,10 +27,6 @@ public class Language {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
-    }
-
     public String getName() {
         return name;
     }

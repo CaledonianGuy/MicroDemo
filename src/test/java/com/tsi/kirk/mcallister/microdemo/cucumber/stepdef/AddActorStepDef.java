@@ -24,7 +24,7 @@ public class AddActorStepDef {
     @Before
     public void beforeScenario() {
         actorRepo = mock(ActorRepository.class);
-        microDemoApp = new MicroDemoApplication(actorRepo);
+//        microDemoApp = new MicroDemoApplication(actorRepo);
 
 //        Actor newActor;
 //        ActorRepository

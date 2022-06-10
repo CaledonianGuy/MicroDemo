@@ -29,12 +29,6 @@ public class Actor {
         return actorId;
     }
 
-    /*
-    public void setActorId(int actorId) {
-        this.actorId = actorId;
-    }
-     */
-
     public String getFirstName() {
         return firstName;
     }

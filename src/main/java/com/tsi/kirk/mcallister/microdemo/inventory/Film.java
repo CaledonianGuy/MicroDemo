@@ -17,11 +17,11 @@ public class Film {
     String title;
     String description;
     Date releaseYear;
-    int languageId;
+    Integer languageId;
     Integer originalLanguageId;
-    int rentalDuration;
+    Integer rentalDuration;
     BigDecimal rentalRate;
-    int length;
+    Integer length;
     BigDecimal replacementCost;
     String rating;
     String specialFeatures;
@@ -30,7 +30,11 @@ public class Film {
     //Constructors -----------------------------------------------------------
     public Film() {}
 
-    public Film(String title, int languageId, int rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost) {
+    public Film(String title,
+                Integer languageId,
+                Integer rentalDuration,
+                BigDecimal rentalRate,
+                BigDecimal replacementCost) {
         this.title = title;
         this.languageId = languageId;
         this.rentalDuration = rentalDuration;
@@ -43,12 +47,6 @@ public class Film {
     public int getFilmId() {
         return filmId;
     }
-
-    /*
-    public void setFilmId(int filmId) {
-        this.filmId = filmId;
-    }
-     */
 
     public String getTitle() {
         return title;
@@ -74,11 +72,11 @@ public class Film {
         this.releaseYear = releaseYear;
     }
 
-    public int getLanguageId() {
+    public Integer getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(int languageId) {
+    public void setLanguageId(Integer languageId) {
         this.languageId = languageId;
     }
 
@@ -90,11 +88,11 @@ public class Film {
         this.originalLanguageId = originalLanguageId;
     }
 
-    public int getRentalDuration() {
+    public Integer getRentalDuration() {
         return rentalDuration;
     }
 
-    public void setRentalDuration(int rentalDuration) {
+    public void setRentalDuration(Integer rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
@@ -106,11 +104,11 @@ public class Film {
         this.rentalRate = rentalRate;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 

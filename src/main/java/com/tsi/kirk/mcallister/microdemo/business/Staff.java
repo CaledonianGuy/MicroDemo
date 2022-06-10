@@ -39,10 +39,6 @@ public class Staff {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
-        this.staffId = staffId;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -59,11 +55,11 @@ public class Staff {
         this.lastName = lastName;
     }
 
-    public int getAddressId() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 
@@ -83,11 +79,11 @@ public class Staff {
         this.email = email;
     }
 
-    public int getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 

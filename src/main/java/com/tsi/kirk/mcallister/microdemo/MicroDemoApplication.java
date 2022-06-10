@@ -3,11 +3,13 @@ package com.tsi.kirk.mcallister.microdemo;
 import com.tsi.kirk.mcallister.microdemo.business.*;
 import com.tsi.kirk.mcallister.microdemo.customerdata.*;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*") //needed for receiving request via api
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class MicroDemoApplication {
 
 	//Attributes -------------------------------------------------------------
+	//Inventory **************************************************************
 	@Autowired
 	private ActorRepository actorRepo;
 	@Autowired
@@ -33,7 +36,9 @@ public class MicroDemoApplication {
 	private FilmCategoryRepository filmCatRepo;
 	@Autowired
 	private FilmActorRepository filmActorRepo;
+	// ***********************************************************************
 
+	//Customer Data **********************************************************
 	@Autowired
 	private AddressRepository addressRepo;
 	@Autowired
@@ -42,7 +47,9 @@ public class MicroDemoApplication {
 	private CountryRepository countryRepo;
 	@Autowired
 	private CustomerRepository customerRepo;
+	// ***********************************************************************
 
+	//Business ***************************************************************
 	@Autowired
 	private PaymentRepository paymentRepo;
 	@Autowired
@@ -51,10 +58,12 @@ public class MicroDemoApplication {
 	private StaffRepository staffRepo;
 	@Autowired
 	private StoreRepository storeRepo;
+	// ***********************************************************************
 	// -----------------------------------------------------------------------
 
 	//Constructors -----------------------------------------------------------
 	public MicroDemoApplication() {}
+
 	public MicroDemoApplication(ActorRepository actorRepo) {
 		this.actorRepo = actorRepo;
 	}
@@ -97,9 +106,10 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Actor")
 	public @ResponseBody
-	void addActor(@RequestParam String firstName, String lastName) {
-		Actor a = new Actor(firstName, lastName);
-		actorRepo.save(a);
+	void addActor(@RequestParam String firstName,
+				  @RequestParam String lastName) {
+		Actor newActor = new Actor(firstName, lastName);
+		actorRepo.save(newActor);
 	}
 
 	@DeleteMapping("/Delete_Actor")
@@ -112,15 +122,22 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Actor")
 	public @ResponseBody
-	void updateActor(@RequestParam int id, String firstName, String lastName) {
-		Actor a = getActor(id);
-		if (!firstName.isBlank()) {
-			a.setFirstName(firstName);
+	void updateActor(@RequestParam int id,
+					 @NotNull String firstName,
+					 String lastName) {
+		Actor updateActor = getActor(id);
+
+		if (updateActor != null) {
+			if (!firstName.isBlank()) {
+				updateActor.setFirstName(firstName);
+			}
+
+			if ((lastName != null) && (!lastName.isBlank())) {
+				updateActor.setLastName(lastName);
+			}
+
+			actorRepo.save(updateActor);
 		}
-		if (!lastName.isBlank()) {
-			a.setLastName(lastName);
-		}
-		actorRepo.save(a);
 	}
 	// ***********************************************************************
 
@@ -140,8 +157,13 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Film")
 	public @ResponseBody
-	void addFilm(@RequestParam String firstName, @RequestParam String lastName) {
-		//TODO switch to film
+	void addFilm(@RequestParam String title,
+				 @RequestParam int languageId,
+				 @RequestParam(defaultValue = "3") Integer rentalDuration,
+				 @RequestParam(defaultValue = "4.99") BigDecimal rentalRate,
+				 @RequestParam(defaultValue = "19.99") BigDecimal replacementCost) {
+		Film newFilm = new Film(title, languageId, rentalDuration, rentalRate, replacementCost);
+		filmRepo.save(newFilm);
 	}
 
 	@DeleteMapping("/Delete_Film")
@@ -154,8 +176,37 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Film")
 	public @ResponseBody
-	void updateFilm(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName) {
-		//TODO switch to film
+	void updateFilm(@RequestParam int id,
+					String title,
+					Integer languageId,
+					Integer rentalDuration,
+					BigDecimal rentalRate,
+					BigDecimal replacementCost) {
+		Film updateFilm = getFilm(id);
+
+		if (updateFilm != null) {
+			if (!title.isBlank()) {
+				updateFilm.setTitle(title);
+			}
+
+			if (languageId != null) {
+				updateFilm.setLanguageId(languageId);
+			}
+
+			if (rentalDuration != null) {
+				updateFilm.setRentalDuration(rentalDuration);
+			}
+
+			if (rentalRate != null) {
+				updateFilm.setRentalRate(rentalRate);
+			}
+
+			if (replacementCost != null) {
+				updateFilm.setReplacementCost(replacementCost);
+			}
+
+			filmRepo.save(updateFilm);
+		}
 	}
 	// ***********************************************************************
 
@@ -165,6 +216,33 @@ public class MicroDemoApplication {
 	Iterable<Category> getAllCategories() {
 		return catRepo.findAll();
 	}
+
+	@GetMapping("/Get_Category")
+	public @ResponseBody
+	Category getCategory(@RequestParam int id) {
+		Optional<Category> foundCategory = catRepo.findById(id);
+		return foundCategory.orElse(null);
+	}
+
+	@PostMapping("/Add_Category")
+	public @ResponseBody
+	void addCategory() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Category")
+	public @ResponseBody
+	void deleteCategory(@RequestParam int id) {
+		if (catRepo.findById(id).isPresent()) {
+			catRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Category")
+	public @ResponseBody
+	void updateCategory() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//Language ***************************************************************
@@ -172,6 +250,33 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<Language> getAllLanguages() {
 		return langRepo.findAll();
+	}
+
+	@GetMapping("/Get_Language")
+	public @ResponseBody
+	Language getLanguage(@RequestParam int id) {
+		Optional<Language> foundLanguage = langRepo.findById(id);
+		return foundLanguage.orElse(null);
+	}
+
+	@PostMapping("/Add_Language")
+	public @ResponseBody
+	void addLanguage() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Language")
+	public @ResponseBody
+	void deleteLanguage(@RequestParam int id) {
+		if (langRepo.findById(id).isPresent()) {
+			langRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Language")
+	public @ResponseBody
+	void updateLanguage() {
+		//TODO build this mapping
 	}
 	// ***********************************************************************
 
@@ -181,6 +286,33 @@ public class MicroDemoApplication {
 	Iterable<FilmText> getAllFilmTexts() {
 		return filmTextRepo.findAll();
 	}
+
+	@GetMapping("/Get_Film_Text")
+	public @ResponseBody
+	FilmText getFilmText(@RequestParam int id) {
+		Optional<FilmText> foundFilmText = filmTextRepo.findById(id);
+		return foundFilmText.orElse(null);
+	}
+
+	@PostMapping("/Add_Film_Text")
+	public @ResponseBody
+	void addFilmText() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Film_Text")
+	public @ResponseBody
+	void deleteFilmText(@RequestParam int id) {
+		if (filmTextRepo.findById(id).isPresent()) {
+			filmTextRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Film_Text")
+	public @ResponseBody
+	void updateFilmText() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
 	//Inventory **************************************************************
@@ -189,9 +321,36 @@ public class MicroDemoApplication {
 	Iterable<Inventory> getAllInventoryItems() {
 		return inventRepo.findAll();
 	}
+
+	@GetMapping("/Get_Inventory_Item")
+	public @ResponseBody
+	Inventory getInventoryItem(@RequestParam int id) {
+		Optional<Inventory> foundInventoryItem = inventRepo.findById(id);
+		return foundInventoryItem.orElse(null);
+	}
+
+	@PostMapping("/Add_Inventory_Item")
+	public @ResponseBody
+	void addInventoryItem() {
+		//TODO build this mapping
+	}
+
+	@DeleteMapping("/Delete_Inventory_Item")
+	public @ResponseBody
+	void deleteInventoryItem(@RequestParam int id) {
+		if (inventRepo.findById(id).isPresent()) {
+			inventRepo.deleteById(id);
+		}
+	}
+
+	@PutMapping("/Update_Inventory_Item")
+	public @ResponseBody
+	void updateInventoryItem() {
+		//TODO build this mapping
+	}
 	// ***********************************************************************
 
-	//Film Category 8*********************************************************
+	//Film Category **********************************************************
 	@GetMapping("/All_Film_Categories")
 	public @ResponseBody
 	Iterable<FilmCategory> getAllFilmCategories() {

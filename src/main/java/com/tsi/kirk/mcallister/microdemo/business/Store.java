@@ -28,23 +28,19 @@ public class Store {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
-    }
-
-    public int getManagerId() {
+    public Integer getManagerId() {
         return managerStaffId;
     }
 
-    public void setManagerId(int managerId) {
+    public void setManagerId(Integer managerId) {
         this.managerStaffId = managerId;
     }
 
-    public int getAddressId() {
+    public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
     // -----------------------------------------------------------------------
