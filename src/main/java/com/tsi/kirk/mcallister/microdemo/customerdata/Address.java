@@ -25,7 +25,7 @@ public class Address {
     //Constructors -----------------------------------------------------------
     public Address() {}
 
-    public Address(String address, String district, int cityId, String phone) {
+    public Address(String address, String district, Integer cityId, String phone) {
         this.address = address;
         this.district = district;
         this.cityId = cityId;

@@ -10,9 +10,14 @@ public class Inventory {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int inventoryId;
-    Integer filmId;
-    Integer storeId;
+    @Column(name = "inventory_id", nullable = false)
+    private int inventoryId;
+    @ManyToOne
+    @JoinColumn(name = "film_id", nullable = false)
+    private Integer filmId;
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Integer storeId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

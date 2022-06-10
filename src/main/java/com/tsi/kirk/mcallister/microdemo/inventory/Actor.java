@@ -10,9 +10,12 @@ public class Actor {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int actorId;
-    String firstName;
-    String lastName;
+    @Column(name = "actor_id", nullable = false)
+    private int actorId;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

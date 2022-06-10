@@ -10,8 +10,10 @@ public class Language {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int languageId;
-    String name;
+    @Column(name = "language_id", nullable = false)
+    private int languageId;
+    @Column(name = "name", nullable = false)
+    private String name;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

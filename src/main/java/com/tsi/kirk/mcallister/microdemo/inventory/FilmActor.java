@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.inventory;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -13,9 +10,9 @@ public class FilmActor {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int actorId;
+    private int actorId;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int filmId;
+    private int filmId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

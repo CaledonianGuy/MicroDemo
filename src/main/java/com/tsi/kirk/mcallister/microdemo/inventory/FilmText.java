@@ -10,9 +10,12 @@ public class FilmText {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int filmId;
-    String title;
-    String description;
+    @Column(name = "film_id", nullable = false)
+    private int filmId;
+    @Column(name = "title", nullable = false)
+    private String title;
+    @Column(name = "description")
+    private String description;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

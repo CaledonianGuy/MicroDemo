@@ -15,13 +15,13 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int cityId;
     String city;
-    int countryId;
+    Integer countryId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public City() {}
 
-    public City(String city, int countryId) {
+    public City(String city, Integer countryId) {
         this.city = city;
         this.countryId = countryId;
     }

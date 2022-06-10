@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*") //needed for receiving request via api
@@ -143,16 +144,16 @@ public class MicroDemoApplication {
 	@PutMapping("/Update_Actor")
 	public @ResponseBody
 	void updateActor(@RequestParam int id,
-					 @NotNull String firstName,
+					 String firstName,
 					 String lastName) {
 		Actor updateActor = getActor(id);
 
 		if (updateActor != null) {
-			if (!firstName.isBlank()) {
+			if (firstName != null && !firstName.isBlank()) {
 				updateActor.setFirstName(firstName);
 			}
 
-			if ((lastName != null) && (!lastName.isBlank())) {
+			if (lastName != null && !lastName.isBlank()) {
 				updateActor.setLastName(lastName);
 			}
 
@@ -198,19 +199,37 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	void updateFilm(@RequestParam int id,
 					String title,
+					String description,
+					Date releaseYear,
 					Integer languageId,
+					Integer originalLanguageId,
 					Integer rentalDuration,
 					BigDecimal rentalRate,
-					BigDecimal replacementCost) {
+					Integer length,
+					BigDecimal replacementCost,
+					String rating,
+					String specialFeatures) {
 		Film updateFilm = getFilm(id);
 
 		if (updateFilm != null) {
-			if (!title.isBlank()) {
+			if (title != null && !title.isBlank()) {
 				updateFilm.setTitle(title);
+			}
+
+			if (description != null && !description.isBlank()) {
+				updateFilm.setDescription(description);
+			}
+
+			if (releaseYear != null) {
+				updateFilm.setReleaseYear(releaseYear);
 			}
 
 			if (languageId != null) {
 				updateFilm.setLanguageId(languageId);
+			}
+
+			if (originalLanguageId != null) {
+				updateFilm.setOriginalLanguageId(originalLanguageId);
 			}
 
 			if (rentalDuration != null) {
@@ -221,8 +240,20 @@ public class MicroDemoApplication {
 				updateFilm.setRentalRate(rentalRate);
 			}
 
+			if (length != null) {
+				updateFilm.setLength(length);
+			}
+
 			if (replacementCost != null) {
 				updateFilm.setReplacementCost(replacementCost);
+			}
+
+			if (rating != null && !rating.isBlank()) {
+				updateFilm.setRating(rating);
+			}
+
+			if (specialFeatures != null && !specialFeatures.isBlank()) {
+				updateFilm.setSpecialFeatures(specialFeatures);
 			}
 
 			filmRepo.save(updateFilm);
@@ -246,8 +277,9 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Category")
 	public @ResponseBody
-	void addCategory() {
-		//TODO build this mapping
+	void addCategory(@RequestParam String name) {
+		Category newCategory = new Category(name);
+		catRepo.save(newCategory);
 	}
 
 	@DeleteMapping("/Delete_Category")
@@ -260,8 +292,17 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Category")
 	public @ResponseBody
-	void updateCategory() {
-		//TODO build this mapping
+	void updateCategory(@RequestParam int id,
+						String name) {
+		Category updateCategory = getCategory(id);
+
+		if (updateCategory != null) {
+			if (name != null && !name.isBlank()) {
+				updateCategory.setName(name);
+			}
+
+			catRepo.save(updateCategory);
+		}
 	}
 	// ***********************************************************************
 
@@ -281,8 +322,9 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Language")
 	public @ResponseBody
-	void addLanguage() {
-		//TODO build this mapping
+	void addLanguage(@RequestParam String name) {
+		Language newLanguage = new Language(name);
+		langRepo.save(newLanguage);
 	}
 
 	@DeleteMapping("/Delete_Language")
@@ -295,8 +337,15 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Language")
 	public @ResponseBody
-	void updateLanguage() {
-		//TODO build this mapping
+	void updateLanguage(@RequestParam int id,
+						String name) {
+		Language updateLanguage = getLanguage(id);
+
+		if (updateLanguage != null) {
+			if (name != null && !name.isBlank()) {
+				updateLanguage.setName(name);
+			}
+		}
 	}
 	// ***********************************************************************
 
@@ -316,8 +365,9 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Film_Text")
 	public @ResponseBody
-	void addFilmText() {
-		//TODO build this mapping
+	void addFilmText(@RequestParam String title) {
+		FilmText newFilmText = new FilmText(title);
+		filmTextRepo.save(newFilmText);
 	}
 
 	@DeleteMapping("/Delete_Film_Text")
@@ -330,8 +380,22 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Film_Text")
 	public @ResponseBody
-	void updateFilmText() {
-		//TODO build this mapping
+	void updateFilmText(@RequestParam int id,
+						String title,
+						String description) {
+		FilmText updateFilmText = getFilmText(id);
+
+		if (updateFilmText != null) {
+			if (title != null && !title.isBlank()) {
+				updateFilmText.setTitle(title);
+			}
+
+			if (description != null && !description.isBlank()) {
+				updateFilmText.setDescription(description);
+			}
+
+			filmTextRepo.save(updateFilmText);
+		}
 	}
 	// ***********************************************************************
 
@@ -351,8 +415,10 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Inventory_Item")
 	public @ResponseBody
-	void addInventoryItem() {
-		//TODO build this mapping
+	void addInventoryItem(@RequestParam Integer filmId,
+						  @RequestParam Integer storeId) {
+		Inventory newInventoryItem = new Inventory(filmId, storeId);
+		inventRepo.save(newInventoryItem);
 	}
 
 	@DeleteMapping("/Delete_Inventory_Item")
@@ -365,8 +431,22 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Inventory_Item")
 	public @ResponseBody
-	void updateInventoryItem() {
-		//TODO build this mapping
+	void updateInventoryItem(@RequestParam int id,
+							 Integer filmId,
+							 Integer storeId) {
+		Inventory updateInventoryItem = getInventoryItem(id);
+
+		if (updateInventoryItem != null) {
+			if (filmId != null) {
+				updateInventoryItem.setFilmId(filmId);
+			}
+
+			if (storeId != null) {
+				updateInventoryItem.setStoreId(storeId);
+			}
+
+			inventRepo.save(updateInventoryItem);
+		}
 	}
 	// ***********************************************************************
 
@@ -376,6 +456,13 @@ public class MicroDemoApplication {
 	Iterable<FilmCategory> getAllFilmCategories() {
 		return filmCatRepo.findAll();
 	}
+
+	@GetMapping("/Get_Film_Category")
+	public @ResponseBody
+	FilmCategory getFilmCategory(@RequestParam int id) {
+		Optional<FilmCategory> foundFilmCategory = filmCatRepo.findById(id);
+		return foundFilmCategory.orElse(null);
+	}
 	// ***********************************************************************
 
 	//Film Actor *************************************************************
@@ -383,6 +470,13 @@ public class MicroDemoApplication {
 	public @ResponseBody
 	Iterable<FilmActor> getAllFilmActors() {
 		return filmActorRepo.findAll();
+	}
+
+	@GetMapping("/Get_Film_Actor")
+	public @ResponseBody
+	FilmActor getFilmActor(@RequestParam int id) {
+		Optional<FilmActor> foundFilmActor = filmActorRepo.findById(id);
+		return foundFilmActor.orElse(null);
 	}
 	// ***********************************************************************
 	// -----------------------------------------------------------------------
@@ -404,8 +498,12 @@ public class MicroDemoApplication {
 
 	@PostMapping("/Add_Address")
 	public @ResponseBody
-	void addAddress() {
-		//TODO build this mapping
+	void addAddress(@RequestParam String address,
+					@RequestParam String district,
+					@RequestParam Integer cityId,
+					@RequestParam String phone) {
+		Address newAddress = new Address(address, district, cityId, phone);
+		addressRepo.save(newAddress);
 	}
 
 	@DeleteMapping("/Delete_Address")
@@ -418,8 +516,40 @@ public class MicroDemoApplication {
 
 	@PutMapping("/Update_Address")
 	public @ResponseBody
-	void updateAddress() {
-		//TODO build this mapping
+	void updateAddress(@RequestParam int id,
+					   String address,
+					   String address2,
+					   String district,
+					   Integer cityId,
+					   String postalCode,
+					   String phone) {
+		Address updateAddress = getAddress(id);
+
+		if (updateAddress != null) {
+			if (address != null && !address.isBlank()) {
+				updateAddress.setAddress(address);
+			}
+
+			if (address2 != null && !address2.isBlank()) {
+				updateAddress.setAddress2(address2);
+			}
+
+			if (district != null && !district.isBlank()) {
+				updateAddress.setDistrict(district);
+			}
+
+			if (cityId != null) {
+				updateAddress.setCityId(cityId);
+			}
+
+			if (postalCode != null && !postalCode.isBlank()) {
+				updateAddress.setPostCode(postalCode);
+			}
+
+			if (phone != null && !phone.isBlank()) {
+				updateAddress.setPhone(phone);
+			}
+		}
 	}
 	// ***********************************************************************
 

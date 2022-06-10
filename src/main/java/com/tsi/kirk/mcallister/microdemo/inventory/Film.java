@@ -13,18 +13,30 @@ public class Film {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int filmId;
-    String title;
-    String description;
-    Date releaseYear;
-    Integer languageId;
-    Integer originalLanguageId;
-    Integer rentalDuration;
-    BigDecimal rentalRate;
-    Integer length;
-    BigDecimal replacementCost;
-    String rating;
-    String specialFeatures;
+    @Column(name = "film_id", nullable = false)
+    private int filmId;
+    @Column(name = "title", nullable = false)
+    private String title;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "release_year")
+    private Date releaseYear;
+    @Column(name = "language_id", nullable = false)
+    private Integer languageId;
+    @Column(name = "original_language_id")
+    private Integer originalLanguageId;
+    @Column(name = "rental_duration", nullable = false)
+    private Integer rentalDuration;
+    @Column(name = "rental_rate", nullable = false)
+    private BigDecimal rentalRate;
+    @Column(name = "length")
+    private Integer length;
+    @Column(name = "replacement_cost", nullable = false)
+    private BigDecimal replacementCost;
+    @Column(name = "rating")
+    private String rating;
+    @Column(name = "special_features")
+    private String specialFeatures;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------

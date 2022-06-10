@@ -10,8 +10,10 @@ public class Category {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int categoryId;
-    String name;
+    @Column(name = "category_id", nullable = false)
+    private int categoryId;
+    @Column(name = "name", nullable = false)
+    private String name;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -23,7 +25,6 @@ public class Category {
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
-
     public int getCategoryId() {
         return categoryId;
     }

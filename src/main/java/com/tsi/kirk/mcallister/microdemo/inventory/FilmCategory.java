@@ -12,10 +12,10 @@ public class FilmCategory {
 
     //Attributes -------------------------------------------------------------
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int filmID;
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int categoryId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int filmID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int categoryId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
