@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.customerdata;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -13,16 +10,20 @@ public class City {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int cityId;
-    String city;
-    Integer countryId;
+    @Column(name = "city_id", nullable = false)
+    private int cityId;
+    @Column(name = "city", nullable = false)
+    private String cityName;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id", nullable = false)
+    private Integer countryId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public City() {}
 
     public City(String city, Integer countryId) {
-        this.city = city;
+        this.cityName = city;
         this.countryId = countryId;
     }
     // -----------------------------------------------------------------------
@@ -32,12 +33,16 @@ public class City {
         return cityId;
     }
 
-    public String getCity() {
-        return city;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public Integer getCountryId() {

@@ -9,8 +9,8 @@ public class FilmText {
 
     //Attributes -------------------------------------------------------------
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
     private int filmId;
     @Column(name = "title", nullable = false)
     private String title;
@@ -29,6 +29,10 @@ public class FilmText {
     //Getters & Setters ------------------------------------------------------=
     public int getFilmId() {
         return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 
     public String getTitle() {

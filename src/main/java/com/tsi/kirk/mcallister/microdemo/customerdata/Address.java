@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.customerdata;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -13,20 +10,28 @@ public class Address {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int addressId;
-    String address;
-    String address2;
-    String district;
-    int cityId;
-    String postalCode;
-    String phone;
+    @Column(name = "address_id", nullable = false)
+    private int addressId;
+    @Column(name = "address", nullable = false)
+    private String address1;
+    @Column(name = "address2")
+    private String address2;
+    @Column(name = "district", nullable = false)
+    private String district;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id", nullable = false)
+    private int cityId;
+    @Column(name = "postal_code")
+    private String postCode;
+    @Column(name = "phone", nullable = false)
+    private String phone;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Address() {}
 
     public Address(String address, String district, Integer cityId, String phone) {
-        this.address = address;
+        this.address1 = address;
         this.district = district;
         this.cityId = cityId;
         this.phone = phone;
@@ -38,12 +43,16 @@ public class Address {
         return addressId;
     }
 
-    public String getAddress() {
-        return address;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getAddress1() {
+        return address1;
+    }
+
+    public void setAddress1(String address) {
+        this.address1 = address;
     }
 
     public String getAddress2() {
@@ -66,16 +75,16 @@ public class Address {
         return cityId;
     }
 
-    public void setCityId(Integer cityId) {
+    public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 
     public String getPostCode() {
-        return postalCode;
+        return postCode;
     }
 
     public void setPostCode(String postCode) {
-        this.postalCode = postCode;
+        this.postCode = postCode;
     }
 
     public String getPhone() {

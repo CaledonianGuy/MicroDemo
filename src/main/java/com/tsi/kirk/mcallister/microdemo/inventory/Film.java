@@ -21,9 +21,11 @@ public class Film {
     private String description;
     @Column(name = "release_year")
     private Date releaseYear;
-    @Column(name = "language_id", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id", referencedColumnName = "language_id", nullable = false)
     private Integer languageId;
-    @Column(name = "original_language_id")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id", referencedColumnName = "language_id")
     private Integer originalLanguageId;
     @Column(name = "rental_duration", nullable = false)
     private Integer rentalDuration;
@@ -38,7 +40,7 @@ public class Film {
     @Column(name = "special_features")
     private String specialFeatures;
     // -----------------------------------------------------------------------
-
+//    @JoinColumn(name = "original_language_id")
     //Constructors -----------------------------------------------------------
     public Film() {}
 
@@ -58,6 +60,10 @@ public class Film {
     //Getters & Setters ------------------------------------------------------
     public int getFilmId() {
         return filmId;
+    }
+
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 
     public String getTitle() {

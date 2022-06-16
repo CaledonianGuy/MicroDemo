@@ -12,12 +12,21 @@ public class Payment {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int paymentId;
-    int customerId;
-    int staffId;
-    Integer rentalId;
-    BigDecimal amount;
-    LocalDateTime paymentDate;
+    @Column(name = "payment_id", nullable = false)
+    private int paymentId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    private int customerId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", nullable = false)
+    private int staffId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rental_id", referencedColumnName = "rental_id")
+    private Integer rentalId;
+    @Column(name = "amount", nullable = false)
+    private BigDecimal amount;
+    @Column(name = "payment_date", nullable = false)
+    private LocalDateTime paymentDate;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -36,11 +45,15 @@ public class Payment {
         return paymentId;
     }
 
+    public void setPaymentId(int paymentId) {
+        this.paymentId = paymentId;
+    }
+
     public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -48,7 +61,7 @@ public class Payment {
         return staffId;
     }
 
-    public void setStaffId(Integer staffId) {
+    public void setStaffId(int staffId) {
         this.staffId = staffId;
     }
 

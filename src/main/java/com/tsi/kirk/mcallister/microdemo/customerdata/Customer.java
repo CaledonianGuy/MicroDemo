@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.customerdata;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -15,14 +12,23 @@ public class Customer {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int customerId;
-    int storeId;
-    String firstName;
-    String lastName;
-    String email;
-    int addressId;
-    Boolean active;
-    LocalDateTime createDate;
+    private int customerId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
+    private int storeId;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+    @Column(name = "email")
+    private String email;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
+    private int addressId;
+    @Column(name = "active", nullable = false)
+    private Boolean active;
+    @Column(name = "create_date", nullable = false)
+    private LocalDateTime createDate;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -48,11 +54,15 @@ public class Customer {
         return customerId;
     }
 
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
     public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Integer storeId) {
+    public void setStoreId(int storeId) {
         this.storeId = storeId;
     }
 
@@ -84,7 +94,7 @@ public class Customer {
         return addressId;
     }
 
-    public void setAddressId(Integer addressId) {
+    public void setAddressId(int addressId) {
         this.addressId = addressId;
     }
 

@@ -12,10 +12,10 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "inventory_id", nullable = false)
     private int inventoryId;
-    @ManyToOne
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id", nullable = false)
     private Integer filmId;
-    @ManyToOne
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     private Integer storeId;
     // -----------------------------------------------------------------------
@@ -32,6 +32,10 @@ public class Inventory {
     //Getters & Setters ------------------------------------------------------
     public int getInventoryId() {
         return inventoryId;
+    }
+
+    public void setInventoryId(int inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public Integer getFilmId() {

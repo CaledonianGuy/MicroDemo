@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.customerdata;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -13,15 +10,17 @@ public class Country {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int countryId;
-    String country;
+    @Column(name = "country_id", nullable = false)
+    private int countryId;
+    @Column(name = "county", nullable = false)
+    private String countryName;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Country() {}
 
     public Country(String country) {
-        this.country = country;
+        this.countryName = country;
     }
     // -----------------------------------------------------------------------
 
@@ -30,12 +29,16 @@ public class Country {
         return countryId;
     }
 
-    public String getCountry() {
-        return country;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
     // -----------------------------------------------------------------------
 

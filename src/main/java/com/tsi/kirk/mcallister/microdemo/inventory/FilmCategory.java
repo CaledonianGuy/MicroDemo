@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.inventory;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -11,18 +8,31 @@ import org.springframework.data.annotation.Id;
 public class FilmCategory {
 
     //Attributes -------------------------------------------------------------
+//    @EmbeddedId
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private FilmCategoryID filmCatId;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     private int filmID;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+//    @Id
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
     private int categoryId;
     // -----------------------------------------------------------------------
 
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Constructors -----------------------------------------------------------
     public FilmCategory() {}
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
+//    public FilmCategoryID getFilmCatId() {
+//        return filmCatId;
+//    }
+
     public int getFilmID() {
         return filmID;
     }

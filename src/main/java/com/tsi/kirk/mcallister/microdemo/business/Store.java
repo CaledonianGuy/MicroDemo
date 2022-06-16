@@ -9,9 +9,14 @@ public class Store {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int storeId;
-    int managerStaffId;
-    int addressId;
+    @Column(name = "store_id", nullable = false)
+    private int storeId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id", nullable = false)
+    private int managerStaffId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
+    private int addressId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -28,19 +33,23 @@ public class Store {
         return storeId;
     }
 
-    public Integer getManagerId() {
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
+
+    public int getManagerStaffId() {
         return managerStaffId;
     }
 
-    public void setManagerId(Integer managerId) {
-        this.managerStaffId = managerId;
+    public void setManagerStaffId(int managerStaffId) {
+        this.managerStaffId = managerStaffId;
     }
 
     public Integer getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(Integer addressId) {
+    public void setAddressId(int addressId) {
         this.addressId = addressId;
     }
     // -----------------------------------------------------------------------

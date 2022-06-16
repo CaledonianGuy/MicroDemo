@@ -13,14 +13,14 @@ public class Language {
     @Column(name = "language_id", nullable = false)
     private int languageId;
     @Column(name = "name", nullable = false)
-    private String name;
+    private String langName;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Language() {}
 
     public Language(String name) {
-        this.name = name;
+        this.langName = name;
     }
     // -----------------------------------------------------------------------
 
@@ -29,12 +29,16 @@ public class Language {
         return languageId;
     }
 
-    public String getName() {
-        return name;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLangName() {
+        return langName;
+    }
+
+    public void setLangName(String langName) {
+        this.langName = langName;
     }
     // -----------------------------------------------------------------------
 

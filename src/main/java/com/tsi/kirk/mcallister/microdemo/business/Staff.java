@@ -9,16 +9,28 @@ public class Staff {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int staffId;
-    String firstName;
-    String lastName;
-    int addressId;
-    byte[] picture;
-    String email;
-    int storeId;
-    Boolean active;
-    String username;
-    String password;
+    @Column(name = "staff_id", nullable = false)
+    private int staffId;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
+    private Integer addressId;
+    @Column(name = "picture")
+    private byte[] picture;
+    @Column(name = "email")
+    private String email;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
+    private Integer storeId;
+    @Column(name = "active")
+    private Boolean active;
+    @Column(name = "username", nullable = false)
+    private String username;
+    @Column(name = "password")
+    private String password;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -37,6 +49,10 @@ public class Staff {
     //Getters & Setters ------------------------------------------------------
     public int getStaffId() {
         return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
 
     public String getFirstName() {

@@ -343,7 +343,7 @@ public class MicroDemoApplication {
 
 		if (updateLanguage != null) {
 			if (name != null && !name.isBlank()) {
-				updateLanguage.setName(name);
+				updateLanguage.setLangName(name);
 			}
 		}
 	}
@@ -527,7 +527,7 @@ public class MicroDemoApplication {
 
 		if (updateAddress != null) {
 			if (address != null && !address.isBlank()) {
-				updateAddress.setAddress(address);
+				updateAddress.setAddress1(address);
 			}
 
 			if (address2 != null && !address2.isBlank()) {

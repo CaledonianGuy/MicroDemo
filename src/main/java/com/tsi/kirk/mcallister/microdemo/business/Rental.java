@@ -11,12 +11,21 @@ public class Rental {
     //Attributes -------------------------------------------------------------
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int rentalId;
-    LocalDateTime rentalDate;
-    int inventoryId;
-    int customerId;
-    LocalDateTime returnDate;
-    int staffId;
+    @Column(name = "rental_id", nullable = false)
+    private int rentalId;
+    @Column(name = "rental_date", nullable = false)
+    private LocalDateTime rentalDate;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id", nullable = false)
+    private int inventoryId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    private int customerId;
+    @Column(name = "return_date")
+    private LocalDateTime returnDate;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", nullable = false)
+    private int staffId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -35,6 +44,10 @@ public class Rental {
         return rentalId;
     }
 
+    public void setRentalId(int rentalId) {
+        this.rentalId = rentalId;
+    }
+
     public LocalDateTime getRentalDate() {
         return rentalDate;
     }
@@ -47,7 +60,7 @@ public class Rental {
         return inventoryId;
     }
 
-    public void setInventoryId(Integer inventoryId) {
+    public void setInventoryId(int inventoryId) {
         this.inventoryId = inventoryId;
     }
 
@@ -55,7 +68,7 @@ public class Rental {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -71,7 +84,7 @@ public class Rental {
         return staffId;
     }
 
-    public void setStaffId(Integer staffId) {
+    public void setStaffId(int staffId) {
         this.staffId = staffId;
     }
     // -----------------------------------------------------------------------
