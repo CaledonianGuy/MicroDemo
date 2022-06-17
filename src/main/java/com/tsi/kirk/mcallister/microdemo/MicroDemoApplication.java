@@ -1,9 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo;
 
-import com.tsi.kirk.mcallister.microdemo.business.*;
-import com.tsi.kirk.mcallister.microdemo.customerdata.*;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "*") //needed for receiving request via api
 @SpringBootApplication
@@ -73,6 +69,82 @@ public class MicroDemoApplication {
 	// -----------------------------------------------------------------------
 
 	//Mappings ---------------------------------------------------------------
+	//New --------------------------------------------------------------------
+	@GetMapping("/Find_Films/{num}")
+	public @ResponseBody
+	ArrayList<Film> getRandomFilms(@PathVariable(value = "num") int numFilmsToFind) {
+		ArrayList<Film> movies = new ArrayList<>();
+		long numOfFilms = filmRepo.count();
+		Random rand = new Random();
+
+		if (numOfFilms <= numFilmsToFind) {
+			getAllFilms().forEach(movies::add);
+		} else {
+			for (int i = 0; i < numFilmsToFind; i++) {
+				int randFilmId = (int)rand.nextLong(numOfFilms);
+				Film addFilm = getFilm(randFilmId);
+				if (!movies.contains(addFilm)) {
+					movies.add(addFilm);
+				} else {
+					i--;
+				}
+			}
+		}
+
+		return movies;
+	}
+
+	@RequestMapping(value = "/Find_Films_By_Genre/{genre}/{num}", method = RequestMethod.GET)
+	public @ResponseBody
+	ArrayList<Film> getRandomFilmsByGenre(@PathVariable(value = "genre") String genreName,
+										  @PathVariable(value = "num") Integer numFilmsToFind) {
+		ArrayList<Film> movies = new ArrayList<>();
+		Optional<Category> genre = catRepo.findByName(genreName);
+
+		if (genre.isPresent()) {
+			Iterable<FilmCategory> filmCats = getFilmCatByCategoryId(genre.get().getCategoryId());
+
+			for (FilmCategory element : filmCats) {
+				movies.add(getFilm(element.getFilmId()));
+			}
+		}
+
+		Random rand = new Random();
+
+		while (movies.size() > numFilmsToFind) {
+			movies.remove(rand.nextInt(movies.size()));
+		}
+
+		return movies;
+	}
+
+	@RequestMapping(value = "Find_Films_By_Actor/{f_name}/{l_name}/{num}", method = RequestMethod.GET)
+	public @ResponseBody
+	ArrayList<Film> getRandomFilmsByActor(@PathVariable(value = "f_name") String firstName,
+										  @PathVariable(value = "l_name") String lastName,
+										  @PathVariable(value = "num") Integer numFilmsToFind) {
+		ArrayList<Film> movies = new ArrayList<>();
+		Optional<Actor> actor = actorRepo.findByFirstNameAndLastName(firstName, lastName);
+
+		if (actor.isPresent()) {
+			Iterable<FilmActor> filmActors = getFilmActorByActorId(actor.get().getActorId());
+
+			for (FilmActor element : filmActors) {
+				movies.add(getFilm(element.getFilmId()));
+			}
+		}
+
+		Random rand = new Random();
+
+		while (movies.size() > numFilmsToFind) {
+			movies.remove(rand.nextInt(movies.size()));
+		}
+
+		return movies;
+	}
+	// -----------------------------------------------------------------------
+
+	//Old --------------------------------------------------------------------
 	//Actor ******************************************************************
 	@GetMapping("/All_Actors")
 	public @ResponseBody
@@ -421,26 +493,14 @@ public class MicroDemoApplication {
 
 	@GetMapping("/Get_Film_Category_By_Film_ID")
 	public @ResponseBody
-	List<FilmCategory> getFilmCatByFilmId(@RequestParam int id) {
-		List<FilmCategory> filmCategoryList = filmCatRepo.findByFilmId(id);
-
-		if (!filmCategoryList.isEmpty()) {
-			return filmCategoryList;
-		} else {
-			return null;
-		}
+	Iterable<FilmCategory> getFilmCatByFilmId(@RequestParam int id) {
+		return filmCatRepo.findByFilmId(id);
 	}
 
 	@GetMapping("/Get_Film_Category_By_Category_ID")
 	public @ResponseBody
-	List<FilmCategory> getFilmCatByCategoryId(@RequestParam int id) {
-		List<FilmCategory> filmCategoryList = filmCatRepo.findByCategoryId(id);
-
-		if (!filmCategoryList.isEmpty()) {
-			return filmCategoryList;
-		} else {
-			return null;
-		}
+	Iterable<FilmCategory> getFilmCatByCategoryId(@RequestParam int id) {
+		return filmCatRepo.findByCategoryId(id);
 	}
 	// ***********************************************************************
 
@@ -453,26 +513,14 @@ public class MicroDemoApplication {
 
 	@GetMapping("/Get_Film_Actor_By_Film_ID")
 	public @ResponseBody
-	List<FilmActor> getFilmActorByFilmId(@RequestParam int id) {
-		List<FilmActor> filmActorList = filmActorRepo.findByFilmId(id);
-
-		if (!filmActorList.isEmpty()) {
-			return filmActorList;
-		} else {
-			return null;
-		}
+	Iterable<FilmActor> getFilmActorByFilmId(@RequestParam int id) {
+		return filmActorRepo.findByFilmId(id);
 	}
 
 	@GetMapping("/Get_Film_Actor_By_Actor_ID")
 	public @ResponseBody
-	List<FilmActor> getFilmActorByActorId(@RequestParam int id) {
-		List<FilmActor> filmActorList = filmActorRepo.findByActorId(id);
-
-		if (!filmActorList.isEmpty()) {
-			return filmActorList;
-		} else {
-			return null;
-		}
+	Iterable<FilmActor> getFilmActorByActorId(@RequestParam int id) {
+		return filmActorRepo.findByActorId(id);
 	}
 	// ***********************************************************************
 	// -----------------------------------------------------------------------
