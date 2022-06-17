@@ -33,6 +33,7 @@ public class MicroDemoApplication {
 	private FilmCategoryRepository filmCatRepo;
 	@Autowired
 	private FilmActorRepository filmActorRepo;
+	private final Random rand = new Random();
 	// -----------------------------------------------------------------------
 
 	//Constructors -----------------------------------------------------------
@@ -75,7 +76,6 @@ public class MicroDemoApplication {
 	ArrayList<Film> getRandomFilms(@PathVariable(value = "num") int numFilmsToFind) {
 		ArrayList<Film> movies = new ArrayList<>();
 		long numOfFilms = filmRepo.count();
-		Random rand = new Random();
 
 		if (numOfFilms <= numFilmsToFind) {
 			getAllFilms().forEach(movies::add);
@@ -94,7 +94,7 @@ public class MicroDemoApplication {
 		return movies;
 	}
 
-	@RequestMapping(value = "/Find_Films_By_Genre/{genre}/{num}", method = RequestMethod.GET)
+	@GetMapping(value = "/Find_Films_By_Genre/{genre}/{num}")
 	public @ResponseBody
 	ArrayList<Film> getRandomFilmsByGenre(@PathVariable(value = "genre") String genreName,
 										  @PathVariable(value = "num") Integer numFilmsToFind) {
@@ -109,8 +109,6 @@ public class MicroDemoApplication {
 			}
 		}
 
-		Random rand = new Random();
-
 		while (movies.size() > numFilmsToFind) {
 			movies.remove(rand.nextInt(movies.size()));
 		}
@@ -118,10 +116,10 @@ public class MicroDemoApplication {
 		return movies;
 	}
 
-	@RequestMapping(value = "Find_Films_By_Actor/{f_name}/{l_name}/{num}", method = RequestMethod.GET)
+	@GetMapping(value = "/Find_Films_By_Actor/{first_name}/{last_name}/{num}")
 	public @ResponseBody
-	ArrayList<Film> getRandomFilmsByActor(@PathVariable(value = "f_name") String firstName,
-										  @PathVariable(value = "l_name") String lastName,
+	ArrayList<Film> getRandomFilmsByActor(@PathVariable(value = "first_name") String firstName,
+										  @PathVariable(value = "last_name") String lastName,
 										  @PathVariable(value = "num") Integer numFilmsToFind) {
 		ArrayList<Film> movies = new ArrayList<>();
 		Optional<Actor> actor = actorRepo.findByFirstNameAndLastName(firstName, lastName);
@@ -134,14 +132,45 @@ public class MicroDemoApplication {
 			}
 		}
 
-		Random rand = new Random();
-
 		while (movies.size() > numFilmsToFind) {
 			movies.remove(rand.nextInt(movies.size()));
 		}
 
 		return movies;
 	}
+
+//	@GetMapping(value = "/Find_Similar_Films_By_Cast/{title}/{num}")
+//	public @ResponseBody
+//	ArrayList<Film> getSimilarFilmsByCast(@PathVariable(value = "title") String title,
+//										  @PathVariable(value = "num") Integer numFilmsToFind) {
+//		return new ArrayList<>();
+//	}
+//
+//	@GetMapping(value = "/Find_Similar_Films_By_Genre/{title}/{num}")
+//	public @ResponseBody
+//	ArrayList<Film> getSimilarFilmsByGenre(@PathVariable(value = "title") String title,
+//										   @PathVariable(value = "num") Integer numFilmsToFind) {
+//		ArrayList<Film> movies = new ArrayList<>();
+//		Optional<Film> film = filmRepo.findByTitle(title);
+//
+//		if (film.isPresent()) {
+//			Optional<FilmCategory> filmCat = filmCatRepo.findByFilmId(film.get().getFilmId());
+//
+//			if (filmCat.isPresent()) {
+//				Category genre = getCategory(filmCat.get().getCategoryId());
+//				movies = getRandomFilmsByGenre(genre.getName(), numFilmsToFind);
+//			}
+//		}
+//
+//		return movies;
+//	}
+//
+//	@GetMapping(value = "/Find_Similar_Films/{title}/{num}")
+//	public @ResponseBody
+//	ArrayList<Film> getSimilarFilms(@PathVariable(value = "title") String title,
+//									@PathVariable(value = "num") Integer numFilmsToFind) {
+//		return new ArrayList<>();
+//	}
 	// -----------------------------------------------------------------------
 
 	//Old --------------------------------------------------------------------
@@ -493,8 +522,9 @@ public class MicroDemoApplication {
 
 	@GetMapping("/Get_Film_Category_By_Film_ID")
 	public @ResponseBody
-	Iterable<FilmCategory> getFilmCatByFilmId(@RequestParam int id) {
-		return filmCatRepo.findByFilmId(id);
+	FilmCategory getFilmCatByFilmId(@RequestParam int id) {
+		Optional<FilmCategory> foundFilmCat = filmCatRepo.findByFilmId(id);
+		return foundFilmCat.orElse(null);
 	}
 
 	@GetMapping("/Get_Film_Category_By_Category_ID")
