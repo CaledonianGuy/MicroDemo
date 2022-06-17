@@ -9,21 +9,21 @@ public class FilmCategoryID implements Serializable {
 
     //Attributes -------------------------------------------------------------
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
-    private int filmID;
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+    private int filmId;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     private int categoryId;
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
     public int getFilmID() {
-        return filmID;
+        return filmId;
     }
 
     public void setFilmID(int filmID) {
-        this.filmID = filmID;
+        this.filmId = filmID;
     }
 
     public int getCategoryId() {

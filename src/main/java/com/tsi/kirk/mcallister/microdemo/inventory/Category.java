@@ -13,14 +13,14 @@ public class Category {
     @Column(name = "category_id", nullable = false)
     private int categoryId;
     @Column(name = "name", nullable = false)
-    private String name;
+    private String catName;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Category() {}
 
     public Category(String name) {
-        this.name = name;
+        this.catName = name;
     }
     // -----------------------------------------------------------------------
 
@@ -34,11 +34,11 @@ public class Category {
     }
 
     public String getName() {
-        return name;
+        return catName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.catName = name;
     }
     // -----------------------------------------------------------------------
 

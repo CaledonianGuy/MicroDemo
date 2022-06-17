@@ -13,10 +13,10 @@ public class Inventory {
     @Column(name = "inventory_id", nullable = false)
     private int inventoryId;
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "film_id", nullable = false)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
     private Integer filmId;
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
     private Integer storeId;
     // -----------------------------------------------------------------------
 

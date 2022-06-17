@@ -8,37 +8,45 @@ import org.springframework.data.annotation.Id;
 public class FilmCategory {
 
     //Attributes -------------------------------------------------------------
-//    @EmbeddedId
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private FilmCategoryID filmCatId;
+    @EmbeddedId
+    private FilmCategoryID filmCatId;
 
     @Id
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
-    private int filmID;
-
-//    @Id
-    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
+    private int filmId;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
     private int categoryId;
     // -----------------------------------------------------------------------
 
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Constructors -----------------------------------------------------------
     public FilmCategory() {}
     // -----------------------------------------------------------------------
+    public FilmCategoryID getFilmCatId() {
+        return filmCatId;
+    }
+
+    public void setFilmCatId(FilmCategoryID filmCatId) {
+        this.filmCatId = filmCatId;
+    }
 
     //Getters & Setters ------------------------------------------------------
-//    public FilmCategoryID getFilmCatId() {
-//        return filmCatId;
-//    }
+    public int getFilmId() {
+        return filmId;
+    }
 
-    public int getFilmID() {
-        return filmID;
+    public void setFilmId(int filmId) {
+        this.filmId = filmId;
     }
 
     public int getCategoryId() {
         return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
     // -----------------------------------------------------------------------
 

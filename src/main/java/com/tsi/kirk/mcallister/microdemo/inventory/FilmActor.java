@@ -8,10 +8,15 @@ import org.springframework.data.annotation.Id;
 public class FilmActor {
 
     //Attributes -------------------------------------------------------------
+    @EmbeddedId
+    private FilmActorID filmActorID;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "actor_id", referencedColumnName = "actor_id", nullable = false)
     private int actorId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
     private int filmId;
     // -----------------------------------------------------------------------
 
@@ -20,6 +25,14 @@ public class FilmActor {
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
+    public FilmActorID getFilmActorID() {
+        return filmActorID;
+    }
+
+    public void setFilmActorID(FilmActorID filmActorID) {
+        this.filmActorID = filmActorID;
+    }
+
     public int getActorId() {
         return actorId;
     }

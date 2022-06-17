@@ -9,10 +9,10 @@ public class FilmActorID implements Serializable {
 
     //Attributes -------------------------------------------------------------
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "actor_id", nullable = false)
+    @JoinColumn(name = "actor_id", referencedColumnName = "actor_id", nullable = false)
     private int actorId;
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "film_id", nullable = false)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
     private int filmId;
     // -----------------------------------------------------------------------
 
