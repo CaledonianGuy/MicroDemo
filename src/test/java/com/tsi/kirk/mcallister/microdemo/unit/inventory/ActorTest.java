@@ -14,10 +14,13 @@ public class ActorTest {
     }
 
     @Test
-    public void testGetActorId() {
+    public void testGetSetActorId() {
+        int expected = 500;
+
+        testActor.setActorId(500);
         int testId = testActor.getActorId();
 
-        Assertions.assertNotNull(testId, "Test ID is NULL");
+        Assertions.assertEquals(expected, testId, "Test ID is wrong");
     }
 
     @Test

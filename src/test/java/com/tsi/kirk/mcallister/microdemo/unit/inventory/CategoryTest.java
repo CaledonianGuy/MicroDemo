@@ -15,10 +15,13 @@ public class CategoryTest {
     }
 
     @Test
-    public void testGetCategoryId() {
+    public void testGetSetCategoryId() {
+        int expected = 500;
+
+        testCategory.setCategoryId(500);
         int testId = testCategory.getCategoryId();
 
-        Assertions.assertNotNull(testId, "Test ID is NULL");
+        Assertions.assertEquals(expected, testId, "Test ID is wrong");
     }
 
     @Test

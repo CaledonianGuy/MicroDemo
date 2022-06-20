@@ -4,11 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FilmActorRepository extends CrudRepository<FilmActor, FilmActorID> {
-
-//    Iterable<FilmActor> findByActorCatId_FilmId(int filmId);
-//    Iterable<FilmActor> findByActorCatId_ActorId(int actorId);
-
+public interface FilmActorRepository extends CrudRepository<FilmActor, Integer> {
     Iterable<FilmActor> findByFilmId(int filmId);
     Iterable<FilmActor> findByActorId(int actorId);
 }

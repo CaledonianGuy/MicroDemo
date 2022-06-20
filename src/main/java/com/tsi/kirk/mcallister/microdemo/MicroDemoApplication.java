@@ -73,20 +73,18 @@ public class MicroDemoApplication {
 	//New --------------------------------------------------------------------
 	@GetMapping("/Find_Films/{num}")
 	public @ResponseBody
-	ArrayList<Film> getRandomFilms(@PathVariable(value = "num") int numFilmsToFind) {
-		ArrayList<Film> movies = new ArrayList<>();
+	List<Film> getRandomFilms(@PathVariable(value = "num") int numFilmsToFind) {
+		List<Film> movies = new ArrayList<>();
 		long numOfFilms = filmRepo.count();
 
 		if (numOfFilms <= numFilmsToFind) {
 			getAllFilms().forEach(movies::add);
 		} else {
-			for (int i = 0; i < numFilmsToFind; i++) {
+			while (movies.size() < numFilmsToFind) {
 				int randFilmId = (int)rand.nextLong(numOfFilms);
 				Film addFilm = getFilm(randFilmId);
 				if (!movies.contains(addFilm)) {
 					movies.add(addFilm);
-				} else {
-					i--;
 				}
 			}
 		}
@@ -96,9 +94,9 @@ public class MicroDemoApplication {
 
 	@GetMapping(value = "/Find_Films_By_Genre/{genre}/{num}")
 	public @ResponseBody
-	ArrayList<Film> getRandomFilmsByGenre(@PathVariable(value = "genre") String genreName,
-										  @PathVariable(value = "num") Integer numFilmsToFind) {
-		ArrayList<Film> movies = new ArrayList<>();
+	List<Film> getRandomFilmsByGenre(@PathVariable(value = "genre") String genreName,
+									 @PathVariable(value = "num") Integer numFilmsToFind) {
+		List<Film> movies = new ArrayList<>();
 		Optional<Category> genre = catRepo.findByName(genreName);
 
 		if (genre.isPresent()) {
@@ -118,10 +116,10 @@ public class MicroDemoApplication {
 
 	@GetMapping(value = "/Find_Films_By_Actor/{first_name}/{last_name}/{num}")
 	public @ResponseBody
-	ArrayList<Film> getRandomFilmsByActor(@PathVariable(value = "first_name") String firstName,
-										  @PathVariable(value = "last_name") String lastName,
-										  @PathVariable(value = "num") Integer numFilmsToFind) {
-		ArrayList<Film> movies = new ArrayList<>();
+	List<Film> getRandomFilmsByActor(@PathVariable(value = "first_name") String firstName,
+									 @PathVariable(value = "last_name") String lastName,
+									 @PathVariable(value = "num") Integer numFilmsToFind) {
+		List<Film> movies = new ArrayList<>();
 		Optional<Actor> actor = actorRepo.findByFirstNameAndLastName(firstName, lastName);
 
 		if (actor.isPresent()) {
@@ -138,39 +136,6 @@ public class MicroDemoApplication {
 
 		return movies;
 	}
-
-//	@GetMapping(value = "/Find_Similar_Films_By_Cast/{title}/{num}")
-//	public @ResponseBody
-//	ArrayList<Film> getSimilarFilmsByCast(@PathVariable(value = "title") String title,
-//										  @PathVariable(value = "num") Integer numFilmsToFind) {
-//		return new ArrayList<>();
-//	}
-//
-//	@GetMapping(value = "/Find_Similar_Films_By_Genre/{title}/{num}")
-//	public @ResponseBody
-//	ArrayList<Film> getSimilarFilmsByGenre(@PathVariable(value = "title") String title,
-//										   @PathVariable(value = "num") Integer numFilmsToFind) {
-//		ArrayList<Film> movies = new ArrayList<>();
-//		Optional<Film> film = filmRepo.findByTitle(title);
-//
-//		if (film.isPresent()) {
-//			Optional<FilmCategory> filmCat = filmCatRepo.findByFilmId(film.get().getFilmId());
-//
-//			if (filmCat.isPresent()) {
-//				Category genre = getCategory(filmCat.get().getCategoryId());
-//				movies = getRandomFilmsByGenre(genre.getName(), numFilmsToFind);
-//			}
-//		}
-//
-//		return movies;
-//	}
-//
-//	@GetMapping(value = "/Find_Similar_Films/{title}/{num}")
-//	public @ResponseBody
-//	ArrayList<Film> getSimilarFilms(@PathVariable(value = "title") String title,
-//									@PathVariable(value = "num") Integer numFilmsToFind) {
-//		return new ArrayList<>();
-//	}
 	// -----------------------------------------------------------------------
 
 	//Old --------------------------------------------------------------------

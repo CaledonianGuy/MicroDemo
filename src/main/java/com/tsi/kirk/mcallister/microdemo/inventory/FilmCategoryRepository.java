@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface FilmCategoryRepository extends CrudRepository<FilmCategory, FilmCategoryID> {
-
-//    Iterable<FilmCategory> findByFilmCatId_FilmId(int filmId);
-//    Iterable<FilmCategory> findByFilmCatId_CategoryId(int categoryId);
+public interface FilmCategoryRepository extends CrudRepository<FilmCategory, Integer> {
 
     Optional<FilmCategory> findByFilmId(int filmId);
     Iterable<FilmCategory> findByCategoryId(int categoryId);

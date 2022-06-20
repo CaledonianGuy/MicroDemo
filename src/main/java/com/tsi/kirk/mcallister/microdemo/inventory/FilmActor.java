@@ -8,9 +8,6 @@ import org.springframework.data.annotation.Id;
 public class FilmActor {
 
     //Attributes -------------------------------------------------------------
-//    @EmbeddedId
-//    private FilmActorID filmActorID;
-
     @Id
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "actor_id", referencedColumnName = "actor_id", nullable = false)
@@ -25,14 +22,6 @@ public class FilmActor {
     // -----------------------------------------------------------------------
 
     //Getters & Setters ------------------------------------------------------
-//    public FilmActorID getFilmActorID() {
-//        return filmActorID;
-//    }
-//
-//    public void setFilmActorID(FilmActorID filmActorID) {
-//        this.filmActorID = filmActorID;
-//    }
-
     public int getActorId() {
         return actorId;
     }
