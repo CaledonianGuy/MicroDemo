@@ -20,7 +20,7 @@ public class Address {
     private String district;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", referencedColumnName = "city_id", nullable = false)
-    private int cityId;
+    private Integer cityId;
     @Column(name = "postal_code")
     private String postCode;
     @Column(name = "phone", nullable = false)
@@ -30,8 +30,8 @@ public class Address {
     //Constructors -----------------------------------------------------------
     public Address() {}
 
-    public Address(String address, String district, Integer cityId, String phone) {
-        this.address1 = address;
+    public Address(String address1, String district, Integer cityId, String phone) {
+        this.address1 = address1;
         this.district = district;
         this.cityId = cityId;
         this.phone = phone;
@@ -75,7 +75,7 @@ public class Address {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 

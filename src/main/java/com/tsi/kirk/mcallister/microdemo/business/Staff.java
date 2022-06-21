@@ -36,7 +36,7 @@ public class Staff {
     //Constructors -----------------------------------------------------------
     public Staff() {}
 
-    public Staff(String firstName, String lastName, int addressId, int storeId, boolean active, String username) {
+    public Staff(String firstName, String lastName, Integer addressId, Integer storeId, boolean active, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.addressId = addressId;

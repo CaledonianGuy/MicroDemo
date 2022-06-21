@@ -13,16 +13,16 @@ public class Store {
     private int storeId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id", nullable = false)
-    private int managerStaffId;
+    private Integer managerStaffId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
-    private int addressId;
+    private Integer addressId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Store() {}
 
-    public Store(int managerId, int addressId) {
+    public Store(Integer managerId, Integer addressId) {
         this.managerStaffId = managerId;
         this.addressId = addressId;
     }
@@ -37,11 +37,11 @@ public class Store {
         this.storeId = storeId;
     }
 
-    public int getManagerStaffId() {
+    public Integer getManagerStaffId() {
         return managerStaffId;
     }
 
-    public void setManagerStaffId(int managerStaffId) {
+    public void setManagerStaffId(Integer managerStaffId) {
         this.managerStaffId = managerStaffId;
     }
 
@@ -49,7 +49,7 @@ public class Store {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
     // -----------------------------------------------------------------------

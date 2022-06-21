@@ -16,10 +16,10 @@ public class Payment {
     private int paymentId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private int customerId;
+    private Integer customerId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", nullable = false)
-    private int staffId;
+    private Integer staffId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "rental_id", referencedColumnName = "rental_id")
     private Integer rentalId;
@@ -32,7 +32,7 @@ public class Payment {
     //Constructors -----------------------------------------------------------
     public Payment() {}
 
-    public Payment(int customerId, int staffId, BigDecimal amount, LocalDateTime paymentDate) {
+    public Payment(Integer customerId, Integer staffId, BigDecimal amount, LocalDateTime paymentDate) {
         this.customerId = customerId;
         this.staffId = staffId;
         this.amount = amount;
@@ -53,7 +53,7 @@ public class Payment {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -61,7 +61,7 @@ public class Payment {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
 

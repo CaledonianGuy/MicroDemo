@@ -15,7 +15,7 @@ public class Customer {
     private int customerId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", referencedColumnName = "store_id", nullable = false)
-    private int storeId;
+    private Integer storeId;
     @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "last_name", nullable = false)
@@ -24,7 +24,7 @@ public class Customer {
     private String email;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
-    private int addressId;
+    private Integer addressId;
     @Column(name = "active", nullable = false)
     private Boolean active;
     @Column(name = "create_date", nullable = false)
@@ -34,10 +34,10 @@ public class Customer {
     //Constructors -----------------------------------------------------------
     public Customer() {}
 
-    public Customer(int storeId,
+    public Customer(Integer storeId,
                     String firstName,
                     String lastName,
-                    int addressId,
+                    Integer addressId,
                     Boolean active,
                     LocalDateTime createDate) {
         this.storeId = storeId;
@@ -62,7 +62,7 @@ public class Customer {
         return storeId;
     }
 
-    public void setStoreId(int storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 
@@ -94,7 +94,7 @@ public class Customer {
         return addressId;
     }
 
-    public void setAddressId(int addressId) {
+    public void setAddressId(Integer addressId) {
         this.addressId = addressId;
     }
 

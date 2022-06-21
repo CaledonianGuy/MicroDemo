@@ -14,7 +14,7 @@ public class FilmActor {
     private int actorId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id", referencedColumnName = "film_id", nullable = false)
-    private int filmId;
+    private Integer filmId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
@@ -30,11 +30,11 @@ public class FilmActor {
         this.actorId = actorId;
     }
 
-    public int getFilmId() {
+    public Integer getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(int filmId) {
+    public void setFilmId(Integer filmId) {
         this.filmId = filmId;
     }
     // -----------------------------------------------------------------------

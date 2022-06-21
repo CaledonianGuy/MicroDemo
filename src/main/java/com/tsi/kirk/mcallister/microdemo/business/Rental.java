@@ -17,21 +17,21 @@ public class Rental {
     private LocalDateTime rentalDate;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id", nullable = false)
-    private int inventoryId;
+    private Integer inventoryId;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
-    private int customerId;
+    private Integer customerId;
     @Column(name = "return_date")
     private LocalDateTime returnDate;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_id", referencedColumnName = "staff_id", nullable = false)
-    private int staffId;
+    private Integer staffId;
     // -----------------------------------------------------------------------
 
     //Constructors -----------------------------------------------------------
     public Rental() {}
 
-    public Rental(LocalDateTime rentalDate, int inventoryId, int customerId, int staffId) {
+    public Rental(LocalDateTime rentalDate, Integer inventoryId, Integer customerId, Integer staffId) {
         this.rentalDate = rentalDate;
         this.inventoryId  = inventoryId;
         this.customerId = customerId;
@@ -60,7 +60,7 @@ public class Rental {
         return inventoryId;
     }
 
-    public void setInventoryId(int inventoryId) {
+    public void setInventoryId(Integer inventoryId) {
         this.inventoryId = inventoryId;
     }
 
@@ -68,7 +68,7 @@ public class Rental {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
 
@@ -84,7 +84,7 @@ public class Rental {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
     // -----------------------------------------------------------------------
