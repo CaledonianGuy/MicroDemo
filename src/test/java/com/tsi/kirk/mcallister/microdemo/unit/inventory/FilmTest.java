@@ -70,17 +70,12 @@ public class FilmTest {
 
     @Test
     void testGetSetOriginalLanguageId() {
-        //TODO issues with Original Language ID being NULL.
-
-        /*
         Integer expected = 500;
 
-        testFilm.setFilmId(expected);
+        testFilm.setOriginalLanguageId(expected);
         Integer actual = testFilm.getOriginalLanguageId();
 
         Assertions.assertEquals(expected, actual, "Original Language ID is wrong");
-
-         */
     }
 
     @Test
@@ -125,17 +120,13 @@ public class FilmTest {
 
     @Test
     void testGetSetRating() {
-        //TODO issues with Rating being NULL.
-
-        /*
         String expected = "R";
 
         testFilm.setRating(expected);
-        String actual = testFilm.getSpecialFeatures();
+        String actual = testFilm.getRating();
 
         Assertions.assertEquals(expected, actual, "Rating is wrong");
 
-         */
     }
 
     @Test

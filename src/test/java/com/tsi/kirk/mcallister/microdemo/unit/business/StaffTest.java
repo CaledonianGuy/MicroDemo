@@ -93,7 +93,12 @@ public class StaffTest {
 
     @Test
     public void testGetSetActive() {
+        boolean expected = false;
 
+        testStaff.setActive(expected);
+        boolean actual = testStaff.getActive();
+
+        Assertions.assertEquals(expected, actual, "Active is wrong");
     }
 
     @Test

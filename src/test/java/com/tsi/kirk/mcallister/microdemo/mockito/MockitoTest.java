@@ -1,7 +1,6 @@
 package com.tsi.kirk.mcallister.microdemo.mockito;
 
 import com.tsi.kirk.mcallister.microdemo.MicroDemoApplication;
-import com.tsi.kirk.mcallister.microdemo.exceptions.ObjectNotFoundException;
 import com.tsi.kirk.mcallister.microdemo.inventory.*;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -20,35 +20,33 @@ import static org.mockito.Mockito.*;
 public class MockitoTest {
 
     private MicroDemoApplication microDemoApp;
-    //@Mock
+    @Mock
     private ActorRepository actorRepo;
-    /*
     @Mock
     private FilmRepository filmRepo;
     @Mock
     private CategoryRepository catRepo;
+//    @Mock
+//    private LanguageRepository langRepo;
+//    @Mock
+//    private FilmTextRepository filmTextRepo;
+//    @Mock
+//    private InventoryRepository inventItemRepo;
     @Mock
-    private LanguageRepository langRepo;
+    private FilmCategoryRepository filmCatRepo;
     @Mock
-    private FilmTextRepository filmTextRepo;
-    @Mock
-    private InventoryRepository inventItemRepo;
-     */
+    private FilmActorRepository filmActorRepo;
+
 
     @BeforeEach
     void setUp() {
-        actorRepo = mock(ActorRepository.class);
-        microDemoApp = new MicroDemoApplication(actorRepo);
-
-//        microDemoApp = mock(MicroDemoApplication.class);
-        /*
-        filmRepo = mock(FilmRepository.class);
-        catRepo = mock(CategoryRepository.class);
-        langRepo = mock(LanguageRepository.class);
-        filmTextRepo = mock(FilmTextRepository.class);
-        inventItemRepo = mock(InventoryRepository.class);
-        microDemoApp = new MicroDemoApplication(actorRepo, filmRepo, catRepo, langRepo, filmTextRepo, inventItemRepo);
-         */
+        microDemoApp = new MicroDemoApplication(
+                actorRepo,
+                filmRepo,
+                catRepo,
+                filmCatRepo,
+                filmActorRepo
+        );
     }
 
     @Test
