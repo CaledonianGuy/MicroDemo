@@ -8,5 +8,5 @@ import java.util.Optional;
 @Repository
 public interface ActorRepository extends CrudRepository<Actor, Integer> {
 
-    Optional<Actor> findByFirstNameAndLastName(String firstName, String LastName);
+    Optional<Actor> findByFirstNameAndLastName(String firstName, String lastName);
 }

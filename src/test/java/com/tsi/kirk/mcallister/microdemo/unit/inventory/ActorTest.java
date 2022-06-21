@@ -17,7 +17,7 @@ public class ActorTest {
     public void testGetSetActorId() {
         int expected = 500;
 
-        testActor.setActorId(500);
+        testActor.setActorId(expected);
         int testId = testActor.getActorId();
 
         Assertions.assertEquals(expected, testId, "Test ID is wrong");

@@ -18,7 +18,7 @@ public class CategoryTest {
     public void testGetSetCategoryId() {
         int expected = 500;
 
-        testCategory.setCategoryId(500);
+        testCategory.setCategoryId(expected);
         int testId = testCategory.getCategoryId();
 
         Assertions.assertEquals(expected, testId, "Test ID is wrong");
