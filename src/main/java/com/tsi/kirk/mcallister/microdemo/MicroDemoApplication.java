@@ -6,14 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.*;
 
-@CrossOrigin(origins = "*") //needed for receiving request via api
+@CrossOrigin(origins = "*")
 @SpringBootApplication
-@RestController //Handles GET, POST, DELETE, PUT requests
-@RequestMapping("/Home") //base URL
+@RestController
+@RequestMapping("/Home")
 public class MicroDemoApplication {
 
 	//Attributes -------------------------------------------------------------
@@ -33,9 +31,9 @@ public class MicroDemoApplication {
 	//Constructors -----------------------------------------------------------
 	public MicroDemoApplication() {}
 
-	public MicroDemoApplication(ActorRepository actorRepo) {
-		this.actorRepo = actorRepo;
-	}
+//	public MicroDemoApplication(ActorRepository actorRepo) {
+//		this.actorRepo = actorRepo;
+//	}
 
 	public MicroDemoApplication(ActorRepository actorRepo,
 								FilmRepository filmRepo,

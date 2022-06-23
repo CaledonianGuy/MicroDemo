@@ -74,8 +74,7 @@
     <dependency> 
       <groupId>io.cucumber</groupId>  
       <artifactId>cucumber-junit</artifactId>  
-      <version>7.3.3</version>  
-      <scope>test</scope> 
+      <version>7.3.3</version>
     </dependency>  
     <dependency> 
       <groupId>io.cucumber</groupId>  
@@ -88,7 +87,63 @@
       <artifactId>annotations</artifactId>  
       <version>23.0.0</version>  
       <scope>compile</scope> 
-    </dependency> 
+    </dependency>
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock-jre8</artifactId>
+      <version>2.33.2</version>
+      <scope>test</scope>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.rest-assured</groupId>-->
+<!--      <artifactId>rest-assured</artifactId>-->
+<!--      <version>5.1.1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-jvm-deps</artifactId>
+      <version>1.0.6</version>
+      <scope>provided</scope>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.codehaus.groovy</groupId>-->
+<!--      <artifactId>groovy-all</artifactId>-->
+<!--      <version>3.0.11</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.rest-assured</groupId>-->
+<!--      <artifactId>rest-assured-common</artifactId>-->
+<!--      <version>5.1.1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.rest-assured</groupId>-->
+<!--      <artifactId>json-path</artifactId>-->
+<!--      <version>5.1.1</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>${httpcore.version}</version>
+    </dependency>
   </dependencies>  
   <build> 
     <plugins> 
@@ -115,7 +170,7 @@
             </goals> 
           </execution> 
         </executions> 
-      </plugin>  
+      </plugin>
       <plugin>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>

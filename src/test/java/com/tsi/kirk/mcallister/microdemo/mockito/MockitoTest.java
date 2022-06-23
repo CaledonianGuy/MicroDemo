@@ -26,12 +26,6 @@ public class MockitoTest {
     private FilmRepository filmRepo;
     @Mock
     private CategoryRepository catRepo;
-//    @Mock
-//    private LanguageRepository langRepo;
-//    @Mock
-//    private FilmTextRepository filmTextRepo;
-//    @Mock
-//    private InventoryRepository inventItemRepo;
     @Mock
     private FilmCategoryRepository filmCatRepo;
     @Mock
@@ -111,5 +105,47 @@ public class MockitoTest {
         actualActor = actorArgumentCaptor.getValue();
 
         Assertions.assertTrue(new ReflectionEquals(expectedActorTwo).matches(actualActor));
+    }
+
+    @Test
+    public void getAllFilms() {
+        microDemoApp.getAllFilms();
+        verify(filmRepo).findAll();
+    }
+
+    @Test
+    public void getFilm() {
+        int mockId = 1;
+        microDemoApp.getFilm(mockId);
+        verify(filmRepo).findById(mockId);
+    }
+
+    @Test
+    public void getFilmCatByCategoryId() {
+        int mockId = 1;
+        microDemoApp.getFilmCatByCategoryId(mockId);
+        verify(filmCatRepo).findByCategoryId(mockId);
+    }
+
+    @Test
+    public void getFilmActorByActorId() {
+        int mockId = 1;
+        microDemoApp.getFilmActorByActorId(mockId);
+        verify(filmActorRepo).findByActorId(mockId);
+    }
+
+    @Test
+    public void getRandomFilms() {
+
+    }
+
+    @Test
+    public void getRandomFilmsByGenre() {
+
+    }
+
+    @Test
+    public void getRandomFilmsByActor() {
+
     }
 }
