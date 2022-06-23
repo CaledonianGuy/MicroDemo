@@ -31,10 +31,6 @@ public class MicroDemoApplication {
 	//Constructors -----------------------------------------------------------
 	public MicroDemoApplication() {}
 
-//	public MicroDemoApplication(ActorRepository actorRepo) {
-//		this.actorRepo = actorRepo;
-//	}
-
 	public MicroDemoApplication(ActorRepository actorRepo,
 								FilmRepository filmRepo,
 								CategoryRepository catRepo,

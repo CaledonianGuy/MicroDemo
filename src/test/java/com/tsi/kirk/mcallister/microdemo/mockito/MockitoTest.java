@@ -133,19 +133,4 @@ public class MockitoTest {
         microDemoApp.getFilmActorByActorId(mockId);
         verify(filmActorRepo).findByActorId(mockId);
     }
-
-    @Test
-    public void getRandomFilms() {
-
-    }
-
-    @Test
-    public void getRandomFilmsByGenre() {
-
-    }
-
-    @Test
-    public void getRandomFilmsByActor() {
-
-    }
 }
